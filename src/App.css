@@ -12,6 +12,19 @@
   margin: auto;
 }
 
+.button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  display: block;
+  cursor: pointer;
+  transition: background-color .2s, color .3s;
+}
+
+.button:focus {
+  outline-color: greenyellow;
+}
+
 @media screen and (max-width: 1024px) {
   .root {
     padding-bottom: 140px;
