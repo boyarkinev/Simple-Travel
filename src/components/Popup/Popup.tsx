@@ -3,7 +3,7 @@ import close from '../../images/close.svg';
 
 import React from 'react';
 import cn from 'classnames';
-import AddCardForm from '../AddCardForm/AddCardForm';
+import CardForm from '../CardForm/CardForm';
 
 interface PopupProps {
   onShow: boolean,
@@ -20,7 +20,7 @@ const Popup: React.FC<PopupProps> = (props) => {
     <div id='addImagePopup' className={cn('popup', {isShown: props.onShow})}>
       <div className='popup__content'>
         <img onClick={handlePopupClose} src={close} alt='Close' className='popup__close' />
-        <AddCardForm />
+        <CardForm />
       </div>
     </div>
   );

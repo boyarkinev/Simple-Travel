@@ -3,11 +3,11 @@ import avatar from '../../images/avatar.jpg'
 
 import React from 'react';
 
-interface ProfileProps {
+interface MyProps {
   popupVisible(): void
 }
 
-const Profile: React.FC<ProfileProps> = (props) => {
+const Profile: React.FC<MyProps> = (props) => {
 
   const handlePopupOpen = () => {
     props.popupVisible();
