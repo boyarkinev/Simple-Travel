@@ -1,13 +1,13 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { placesFetchData } from '../services/api.service';
-import { placesFetchDataAC } from './actionCreators/actionCreators';
-import { PLACES_LOAD_DATA_ACTION } from './actions/actions';
+import { convertFbObjectToArray } from '../services/api.service';
+import { fetchDataAC } from './actionCreators/actionCreators';
+import { LOAD_DATA_ACTION } from './actions/actions';
 
 function* loadDataWorker() {
-  const data = yield call(placesFetchData);
-  yield put(placesFetchDataAC(data))
+  const data = yield call(convertFbObjectToArray);
+  yield put(fetchDataAC(data))
 }
 
 export function* watchPlacesLoadData() {
-  yield takeEvery(PLACES_LOAD_DATA_ACTION, loadDataWorker);
+  yield takeEvery(LOAD_DATA_ACTION, loadDataWorker);
 }

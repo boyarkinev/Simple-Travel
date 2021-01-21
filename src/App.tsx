@@ -1,12 +1,21 @@
 import './App.css';
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from './components/Header/Header';
 import Profile from './components/Profile/Profile';
 import Popup from './components/Popup/Popup';
 import CardList from './components/CardList/CardList';
+import {loadDataAC} from "./store/actionCreators/actionCreators";
+import store from "./store/store";
 
-const App: React.FC = () => {
+const dispatch = (action: any) => store.dispatch(action);
+
+const App: React.FC = (props) => {
+
+  useEffect(() => {
+    dispatch(loadDataAC());
+  }, []);
+
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const popupVisible = () =>

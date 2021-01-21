@@ -1,33 +1,28 @@
 import './CardList.css';
-import React, { useEffect } from 'react';
-import { IPlace, IPlacesState } from '../../interfaces/interfaces';
+import React from 'react';
+import { ICardData, ICardsDataState } from '../../interfaces/interfaces';
 import Card from '../Card/Card';
 import { bindActionCreators } from 'redux';
-import { placesFetchDataAC, placesLoadDataAC } from '../../store/actionCreators/actionCreators';
+import { fetchDataAC } from '../../store/actionCreators/actionCreators';
 import { connect } from 'react-redux';
-import store from '../../store/store';
 
 interface IMyState {
-  placesData: IPlacesState;
+  placesData: ICardsDataState;
 }
 
 interface IMyProps {
-  places: Array<IPlace>;
+  places: Array<ICardData>;
   placesAction: object;
 }
 
-const dispatch = (action: any) => store.dispatch(action)
-
-const CardList: React.FC<any> = (props: IMyProps) => {
-
-  useEffect(() => { dispatch(placesLoadDataAC()) },[])
+const CardList: React.FC<IMyProps> = (props: IMyProps) => {
 
   const { places } = props;
 
   return (
     <div className='places-list root__section'>
-      {places.map((card: IPlace) => (
-        <Card data={card} key={card.placeName} />
+      {places.map((card: ICardData) => (
+        <Card data={card} key={card.id} />
       ))}
     </div>
   );
@@ -41,7 +36,7 @@ const mapStateToProps = (state: IMyState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    placesAction: bindActionCreators(placesFetchDataAC, dispatch),
+    placesAction: bindActionCreators(fetchDataAC, dispatch),
   };
 };
 

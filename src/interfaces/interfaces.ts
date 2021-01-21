@@ -1,8 +1,9 @@
-export interface IPlace {
+export interface ICardData {
   placeName: string;
   placePhotoLink: string;
-  date: string;
-  isLiked: boolean;
+  date?: string;
+  isLiked?: boolean;
+  id?: string;
 }
 
 export interface IFormState {
@@ -12,9 +13,9 @@ export interface IFormState {
 
 export interface IAction {
   type: string;
-  payload: Array<IPlace>;
+  payload: Array<ICardData> | string;
 }
 
-export interface IPlacesState {
-  places: Array<IPlace>;
+export interface ICardsDataState {
+  places: Array<ICardData>;
 }

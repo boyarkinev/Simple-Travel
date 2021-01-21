@@ -1,5 +1,5 @@
 .root {
-  background-color: black;
+  background-color: #000000;
   min-height: 100vh;
   font-family: 'Inter';
   padding-bottom: 194px;
@@ -16,13 +16,14 @@
   background-color: transparent;
   border: 1px solid white;
   color: white;
+  outline: none;
   display: block;
   cursor: pointer;
   transition: background-color .2s, color .3s;
 }
 
 .button:focus {
-  outline-color: greenyellow;
+  box-shadow: 0 0 0 2px greenyellow;
 }
 
 @media screen and (max-width: 1024px) {

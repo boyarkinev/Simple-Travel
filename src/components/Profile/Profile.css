@@ -38,12 +38,16 @@
 }
 
 .button__add-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 16px;
   right: 0;
 	width: 150px;
   height: 50px;
-	font-size: 30px;
+  font-size: 30px;
+  outline: none;
 }
 
 .button__edit-profile {

@@ -1,22 +1,33 @@
 import './Card.css'
 
-import React from 'react';
-import { IPlace } from '../../interfaces/interfaces';
+import React, {PropsWithChildren} from 'react';
+import {ICardData} from '../../interfaces/interfaces';
+import {deleteDataToDB} from "../../services/api.service";
 
 type TProps = {
-  data: IPlace
+  data: ICardData
 }
 
-const Card: React.FC<TProps> = (props) => {
+const Card: React.FC<TProps> = (props: PropsWithChildren<TProps>) => {
 
-  const { placeName, placePhotoLink } = props.data;
+  const {placeName, placePhotoLink, id} = props.data;
+
+  const handleDeleteButtonClick = async (event: any) => {
+    event.preventDefault();
+    // console.log(event.target.id)
+    await deleteDataToDB(event.target.id)
+  }
 
   return (
     <div className='place-card'>
       <div className='place-card__image-container'>
-        <img className='place-card__image' src={placePhotoLink} alt={placeName} />
-        <button className='place-card__delete-icon '>
-          <i className='material-icons'>delete</i>
+        <img className='place-card__image' src={placePhotoLink} alt={placeName}/>
+        <button
+          onClick={handleDeleteButtonClick}
+          // type='submit'
+          className='place-card__delete-icon'
+        >
+          <i className='material-icons' id={id}>delete</i>
         </button>
       </div>
       <div className='place-card__description'>

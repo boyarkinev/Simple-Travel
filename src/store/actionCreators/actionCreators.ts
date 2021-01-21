@@ -1,9 +1,9 @@
-import { IPlacesState } from '../../interfaces/interfaces';
+import { ICardsDataState } from '../../interfaces/interfaces';
 import {
   CHANGE_NAME_INPUT_ACTION,
   CHANGE_LINK_INPUT_ACTION,
-  PLACES_FETCH_DATA_ACTION,
-  PLACES_LOAD_DATA_ACTION,
+  FETCH_DATA_ACTION,
+  LOAD_DATA_ACTION,
 } from '../actions/actions';
 
 export const changeNameInputAC = (value: string) => {
@@ -20,15 +20,15 @@ export const changeLinkInputAC = (value: string) => {
   };
 };
 
-export const placesFetchDataAC = (data: IPlacesState) => {
+export const fetchDataAC = (data: ICardsDataState) => {
   return {
-    type: PLACES_FETCH_DATA_ACTION,
+    type: FETCH_DATA_ACTION,
     payload: data,
   };
 };
 
-export const placesLoadDataAC = () => {
+export const loadDataAC = () => {
   return {
-    type: PLACES_LOAD_DATA_ACTION,
+    type: LOAD_DATA_ACTION,
   };
 };

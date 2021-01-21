@@ -3,27 +3,57 @@ import close from '../../images/close.svg';
 
 import React from 'react';
 import cn from 'classnames';
-import CardForm from '../CardForm/CardForm';
+import PopupForm from '../PopupForm/PopupForm';
+import { IFormState } from '../../interfaces/interfaces';
+import { bindActionCreators } from 'redux';
+import { changeLinkInputAC, changeNameInputAC } from '../../store/actionCreators/actionCreators';
+import { connect } from 'react-redux';
 
-interface PopupProps {
-  onShow: boolean,
-  popupVisible(): void
+interface IPopupProps {
+  onShow: boolean;
+  changePlaceName(arg: string): void;
+  changePlacePhotoLink(arg: string): void;
+  placeName: string;
+  placePhotoLink: string;
+  popupVisible(): void;
 }
 
-const Popup: React.FC<PopupProps> = (props) => {
+type TFormState = {
+  popupData: IFormState;
+};
+
+const Popup: React.FC<IPopupProps> = (props) => {
+
+  const { popupVisible, changePlaceName, changePlacePhotoLink } = props
 
   const handlePopupClose = () => {
-    props.popupVisible();
+    changePlaceName('');
+    changePlacePhotoLink('');
+    popupVisible();
   }
 
   return (
     <div id='addImagePopup' className={cn('popup', {isShown: props.onShow})}>
       <div className='popup__content'>
         <img onClick={handlePopupClose} src={close} alt='Close' className='popup__close' />
-        <CardForm />
+        <PopupForm data={props} />
       </div>
     </div>
   );
 };
 
-export default Popup;
+const mapStateToProps = (state: TFormState) => {
+  return {
+    placeName: state.popupData.placeName,
+    placePhotoLink: state.popupData.placePhotoLink,
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    changePlaceName: bindActionCreators(changeNameInputAC, dispatch),
+    changePlacePhotoLink: bindActionCreators(changeLinkInputAC, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Popup);
