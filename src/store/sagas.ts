@@ -1,7 +1,7 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
-import { convertFbObjectToArray } from '../services/api.service';
-import { fetchDataAC } from './actionCreators/actionCreators';
-import { LOAD_DATA_ACTION } from './actions/actions';
+import {call, put, takeEvery} from 'redux-saga/effects';
+import {convertFbObjectToArray} from '../services/api.service';
+import {fetchDataAC} from './actionCreators/actionCreators';
+import {LOAD_DATA_ACTION} from './actions/actions';
 
 function* loadDataWorker() {
   const data = yield call(convertFbObjectToArray);

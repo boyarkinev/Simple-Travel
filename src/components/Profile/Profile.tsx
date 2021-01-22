@@ -9,7 +9,7 @@ interface MyProps {
 
 const Profile: React.FC<MyProps> = (props: PropsWithChildren<MyProps>) => {
 
-  const { popupVisible } = props;
+  const {popupVisible} = props;
 
   const handlePopupOpen = () => {
     popupVisible();
@@ -18,7 +18,7 @@ const Profile: React.FC<MyProps> = (props: PropsWithChildren<MyProps>) => {
   return (
     <div className='profile root__section'>
       <div className='user-info'>
-        <img src={avatar} alt='Avatar' className='user-info__photo' />
+        <img src={avatar} alt='Avatar' className='user-info__photo'/>
         <div className='user-info__data'>
           <h1 className='user-info__name'>Jaques Causteau</h1>
           <p className='user-info__job'>Sailor, Researcher</p>

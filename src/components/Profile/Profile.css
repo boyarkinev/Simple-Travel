@@ -44,20 +44,20 @@
   position: absolute;
   top: 16px;
   right: 0;
-	width: 150px;
+  width: 150px;
   height: 50px;
   font-size: 30px;
   outline: none;
 }
 
 .button__edit-profile {
-	background-color: transparent;
+  background-color: transparent;
   border: 1px solid white;
   color: white;
   width: 38px;
   height: 18px;
   font-size: 12px;
-	line-height: 15px;
+  line-height: 15px;
   display: block;
   cursor: pointer;
   margin-top: 20px;
@@ -65,8 +65,8 @@
 
 .button__add-card:hover,
 .button__edit-profile:hover {
-	background-color: white;
-	color: black;
+  background-color: white;
+  color: black;
 }
 
 @media screen and (max-width: 980px) {

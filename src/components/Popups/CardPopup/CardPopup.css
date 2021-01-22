@@ -21,8 +21,9 @@
 }
 
 .popup__close {
-  width: 26px;
   position: absolute;
+  font-size: 32px;
+  color: #fff;
   top: -26px;
   right: -26px;
   cursor: pointer;
@@ -37,12 +38,13 @@
 .popup__form {
   margin-top: 60px;
 }
-.popup__form:last-child{
-	margin-bottom: 0;
+
+.popup__form:last-child {
+  margin-bottom: 0;
 }
 
 .popup__input-container {
-	min-height: 40px;
+  min-height: 40px;
 }
 
 .popup__input {
@@ -63,11 +65,11 @@
 .alert-message {
   color: #FF0000;
   font-size: 12px;
-	line-height: 15px;
+  line-height: 15px;
   padding: 3px 0 0 5px;
-	margin-bottom: 14px;
-	display: block;
-	height: 15px;
+  margin-bottom: 14px;
+  display: block;
+  height: 15px;
 }
 
 .popup.isShown {
@@ -79,22 +81,22 @@
   height: 50px;
   border: 1px solid rgba(0, 0, 0, .2);
   margin-top: 48px;
-	color: white;
-	background-color: black;
+  color: white;
+  background-color: black;
 }
 
 #addImageForm .popup__button {
-	font-size: 36px;
+  font-size: 36px;
 }
 
 #editUserForm .popup__button {
-	font-size: 18px;
-	line-height: 22px;
+  font-size: 18px;
+  line-height: 22px;
 }
 
-.popup__button:disabled{
-	color: rgba(0, 0, 0, .2);
-	background-color: transparent;
+.popup__button:disabled {
+  color: rgba(0, 0, 0, .2);
+  background-color: transparent;
 }
 
 @media screen and (max-width: 540px) {

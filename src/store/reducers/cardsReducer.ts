@@ -1,5 +1,5 @@
-import { IAction, ICardsDataState } from '../../interfaces/interfaces';
-import { FETCH_DATA_ACTION } from '../actions/actions';
+import {IAction, ICardsDataState} from '../../interfaces/interfaces';
+import {FETCH_DATA_ACTION} from '../actions/actions';
 
 const initialState: ICardsDataState = {
   places: [],
@@ -8,7 +8,7 @@ const initialState: ICardsDataState = {
 const cardsReducer = (state: ICardsDataState = initialState, action: IAction) => {
   switch (action.type) {
     case FETCH_DATA_ACTION:
-      return { ...state, places: action.payload };
+      return {...state, places: action.payload};
     default:
       return state;
   }

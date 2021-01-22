@@ -1,8 +1,8 @@
 import React, {PropsWithChildren} from 'react';
 
-import {putDataToDB} from '../../services/api.service';
-import store from "../../store/store";
-import {loadDataAC} from "../../store/actionCreators/actionCreators";
+import {putDataToDB} from '../../../services/api.service';
+import store from "../../../store/store";
+import {loadDataAC} from "../../../store/actionCreators/actionCreators";
 
 interface IPopupProps {
   data: {
@@ -16,7 +16,7 @@ interface IPopupProps {
 
 const dispatch = (action: any) => store.dispatch(action);
 
-const PopupForm: React.FC<IPopupProps> = (props: PropsWithChildren<IPopupProps>) => {
+const UserPopupForm: React.FC<IPopupProps> = (props: PropsWithChildren<IPopupProps>) => {
   const {
     placeName,
     placePhotoLink,
@@ -46,7 +46,7 @@ const PopupForm: React.FC<IPopupProps> = (props: PropsWithChildren<IPopupProps>)
 
   return (
     <>
-      <h3 className='popup__title'>Новая карточка</h3>
+      <h3 className='popup__title'>Редактировать пользователя</h3>
       <form
         id='addImageForm'
         className='popup__form'
@@ -88,4 +88,4 @@ const PopupForm: React.FC<IPopupProps> = (props: PropsWithChildren<IPopupProps>)
   );
 };
 
-export default PopupForm;
+export default UserPopupForm;

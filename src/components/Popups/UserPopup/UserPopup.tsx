@@ -1,20 +1,23 @@
-import './Popup.css';
-import close from '../../images/close.svg';
+import './UserPopup.css';
 
 import React from 'react';
 import cn from 'classnames';
-import PopupForm from '../PopupForm/PopupForm';
-import { IFormState } from '../../interfaces/interfaces';
-import { bindActionCreators } from 'redux';
-import { changeLinkInputAC, changeNameInputAC } from '../../store/actionCreators/actionCreators';
-import { connect } from 'react-redux';
+import {IFormState} from '../../../interfaces/interfaces';
+import {bindActionCreators} from 'redux';
+import {changeLinkInputAC, changeNameInputAC} from '../../../store/actionCreators/actionCreators';
+import {connect} from 'react-redux';
+import UserPopupForm from "../UserPopupForm/UserPopupForm";
 
 interface IPopupProps {
   onShow: boolean;
+
   changePlaceName(arg: string): void;
+
   changePlacePhotoLink(arg: string): void;
+
   placeName: string;
   placePhotoLink: string;
+
   popupVisible(): void;
 }
 
@@ -22,9 +25,9 @@ type TFormState = {
   popupData: IFormState;
 };
 
-const Popup: React.FC<IPopupProps> = (props) => {
+const UserPopup: React.FC<IPopupProps> = (props) => {
 
-  const { popupVisible, changePlaceName, changePlacePhotoLink } = props
+  const {popupVisible, changePlaceName, changePlacePhotoLink, onShow} = props
 
   const handlePopupClose = () => {
     changePlaceName('');
@@ -33,14 +36,14 @@ const Popup: React.FC<IPopupProps> = (props) => {
   }
 
   return (
-    <div id='addImagePopup' className={cn('popup', {isShown: props.onShow})}>
+    <div id='addImagePopup' className={cn('popup', {isShown: onShow})}>
       <div className='popup__content'>
-        <img onClick={handlePopupClose} src={close} alt='Close' className='popup__close' />
-        <PopupForm data={props} />
+        <i onClick={handlePopupClose} className='material-icons popup__close'>clear</i>
+        <UserPopupForm data={props}/>
       </div>
     </div>
   );
-};
+}
 
 const mapStateToProps = (state: TFormState) => {
   return {
@@ -56,4 +59,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Popup);
+export default connect(mapStateToProps, mapDispatchToProps)(UserPopup);
