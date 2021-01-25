@@ -1,9 +1,9 @@
 export interface ICardData {
   placeName: string;
   placePhotoLink: string;
-  date?: string;
-  isLiked?: boolean;
-  id?: string;
+  date: string;
+  likesCount: number;
+  id: string;
 }
 
 export interface IFormState {
@@ -13,7 +13,7 @@ export interface IFormState {
 
 export interface IAction {
   type: string;
-  payload: Array<ICardData> | string;
+  payload?: Array<ICardData> | string;
 }
 
 export interface ICardsDataState {

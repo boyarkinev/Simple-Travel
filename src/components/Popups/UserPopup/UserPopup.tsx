@@ -4,7 +4,7 @@ import React from 'react';
 import cn from 'classnames';
 import {IFormState} from '../../../interfaces/interfaces';
 import {bindActionCreators} from 'redux';
-import {changeLinkInputAC, changeNameInputAC} from '../../../store/actionCreators/actionCreators';
+import {changePlaceLinkInputAC, changePlaceNameInputAC} from '../../../store/actionCreators/actionCreators';
 import {connect} from 'react-redux';
 import UserPopupForm from "../UserPopupForm/UserPopupForm";
 
@@ -27,13 +27,13 @@ type TFormState = {
 
 const UserPopup: React.FC<IPopupProps> = (props) => {
 
-  const {popupVisible, changePlaceName, changePlacePhotoLink, onShow} = props
+  const {popupVisible, changePlaceName, changePlacePhotoLink, onShow} = props;
 
   const handlePopupClose = () => {
     changePlaceName('');
     changePlacePhotoLink('');
     popupVisible();
-  }
+  };
 
   return (
     <div id='addImagePopup' className={cn('popup', {isShown: onShow})}>
@@ -43,7 +43,7 @@ const UserPopup: React.FC<IPopupProps> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state: TFormState) => {
   return {
@@ -54,8 +54,8 @@ const mapStateToProps = (state: TFormState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    changePlaceName: bindActionCreators(changeNameInputAC, dispatch),
-    changePlacePhotoLink: bindActionCreators(changeLinkInputAC, dispatch),
+    changePlaceName: bindActionCreators(changePlaceNameInputAC, dispatch),
+    changePlacePhotoLink: bindActionCreators(changePlaceLinkInputAC, dispatch),
   };
 };
 

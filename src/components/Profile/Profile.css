@@ -70,35 +70,27 @@
 }
 
 @media screen and (max-width: 980px) {
-  .user-info__button {
-    position: static;
-    margin-bottom: 40px;
+  .user-info {
+    flex-direction: column;
+    align-items: center;
   }
-}
-
-@media screen and (max-width: 980px) {
+  
   .user-info__data {
     margin: 20px 0;
     text-align: center;
   }
-}
-
-@media screen and (max-width: 980px) {
-  .user-info__edit-button {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media screen and (max-width: 980px) {
+  
   .user-info__photo {
     margin-top: 40px;
   }
-}
-
-@media screen and (max-width: 980px) {
-  .user-info {
-    flex-direction: column;
-    align-items: center;
+  
+  .button__add-card {
+    position: static;
+    margin-bottom: 40px;
+  }
+  
+  .button__edit-profile {
+    margin-left: auto;
+    margin-right: auto;
   }
 }

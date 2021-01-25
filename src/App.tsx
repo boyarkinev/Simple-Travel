@@ -1,12 +1,12 @@
 import './App.css';
 
 import React, {useEffect, useState} from 'react';
+import store from "./store/store";
 import Header from './components/Header/Header';
 import Profile from './components/Profile/Profile';
-import Popup from './components/Popups/CardPopup/CardPopup';
 import CardList from './components/CardList/CardList';
+import CardPopup from './components/Popups/CardPopup/CardPopup';
 import {loadDataAC} from "./store/actionCreators/actionCreators";
-import store from "./store/store";
 
 const dispatch = (action: any) => store.dispatch(action);
 
@@ -26,7 +26,7 @@ const App: React.FC = () => {
       <Header/>
       <Profile popupVisible={popupVisible}/>
       <CardList/>
-      <Popup onShow={isActive} popupVisible={popupVisible}/>
+      <CardPopup onShow={isActive} popupVisible={popupVisible}/>
     </div>
   );
 };

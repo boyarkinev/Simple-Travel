@@ -8,7 +8,7 @@ const Header: React.FC = () => {
     <header className="header root__section">
       <img src={logo} alt="Logo" className="logo"/>
     </header>
-  )
-}
+  );
+};
 
 export default Header;

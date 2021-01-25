@@ -5,7 +5,7 @@ import {LOAD_DATA_ACTION} from './actions/actions';
 
 function* loadDataWorker() {
   const data = yield call(convertFbObjectToArray);
-  yield put(fetchDataAC(data))
+  yield put(fetchDataAC(data));
 }
 
 export function* watchPlacesLoadData() {

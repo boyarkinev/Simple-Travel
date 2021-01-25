@@ -1,21 +1,21 @@
 import {ICardsDataState} from '../../interfaces/interfaces';
 import {
-  CHANGE_LINK_INPUT_ACTION,
-  CHANGE_NAME_INPUT_ACTION,
+  CHANGE_PLACE_LINK_INPUT_ACTION,
+  CHANGE_PLACE_NAME_INPUT_ACTION,
   FETCH_DATA_ACTION,
   LOAD_DATA_ACTION,
 } from '../actions/actions';
 
-export const changeNameInputAC = (value: string) => {
+export const changePlaceNameInputAC = (value: string) => {
   return {
-    type: CHANGE_NAME_INPUT_ACTION,
+    type: CHANGE_PLACE_NAME_INPUT_ACTION,
     payload: value,
   };
 };
 
-export const changeLinkInputAC = (value: string) => {
+export const changePlaceLinkInputAC = (value: string) => {
   return {
-    type: CHANGE_LINK_INPUT_ACTION,
+    type: CHANGE_PLACE_LINK_INPUT_ACTION,
     payload: value,
   };
 };

@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 
 import {putDataToDB} from '../../../services/api.service';
 import store from "../../../store/store";
@@ -16,7 +16,7 @@ interface IPopupProps {
 
 const dispatch = (action: any) => store.dispatch(action);
 
-const CardPopupForm: React.FC<IPopupProps> = (props: PropsWithChildren<IPopupProps>) => {
+const CardPopupForm: React.FC<IPopupProps> = (props) => {
   const {
     placeName,
     placePhotoLink,
@@ -36,12 +36,12 @@ const CardPopupForm: React.FC<IPopupProps> = (props: PropsWithChildren<IPopupPro
       placeName,
       placePhotoLink,
       date: new Date().toLocaleDateString(),
-      isLiked: false,
+      likesCount: 0,
     });
     changePlaceName('');
     changePlacePhotoLink('');
     popupVisible();
-    dispatch(loadDataAC())
+    dispatch(loadDataAC());
   };
 
   return (

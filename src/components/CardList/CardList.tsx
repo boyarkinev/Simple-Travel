@@ -12,9 +12,7 @@ interface IMyProps {
   places: Array<ICardData>;
 }
 
-const CardList: React.FC<IMyProps> = (props: IMyProps) => {
-
-  const {places} = props;
+const CardList: React.FC<IMyProps> = ({places}) => {
 
   return (
     <div className='places-list root__section'>

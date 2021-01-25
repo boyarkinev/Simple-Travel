@@ -5,7 +5,7 @@ import cn from 'classnames';
 import CardPopupForm from '../CardPopupForm/CardPopupForm';
 import {IFormState} from '../../../interfaces/interfaces';
 import {bindActionCreators} from 'redux';
-import {changeLinkInputAC, changeNameInputAC} from '../../../store/actionCreators/actionCreators';
+import {changePlaceLinkInputAC, changePlaceNameInputAC} from '../../../store/actionCreators/actionCreators';
 import {connect} from 'react-redux';
 
 interface IPopupProps {
@@ -27,23 +27,23 @@ type TFormState = {
 
 const CardPopup: React.FC<IPopupProps> = (props) => {
 
-  const {popupVisible, changePlaceName, changePlacePhotoLink, onShow} = props
+  const {popupVisible, changePlaceName, changePlacePhotoLink, onShow} = props;
 
   const handlePopupClose = () => {
     changePlaceName('');
     changePlacePhotoLink('');
     popupVisible();
-  }
+  };
 
   return (
-    <div id='addImagePopup' className={cn('popup', {isShown: onShow})}>
+    <div className={cn('popup', {isShown: onShow})}>
       <div className='popup__content'>
         <i onClick={handlePopupClose} className='material-icons popup__close'>clear</i>
         <CardPopupForm data={props}/>
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state: TFormState) => {
   return {
@@ -54,8 +54,8 @@ const mapStateToProps = (state: TFormState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    changePlaceName: bindActionCreators(changeNameInputAC, dispatch),
-    changePlacePhotoLink: bindActionCreators(changeLinkInputAC, dispatch),
+    changePlaceName: bindActionCreators(changePlaceNameInputAC, dispatch),
+    changePlacePhotoLink: bindActionCreators(changePlaceLinkInputAC, dispatch),
   };
 };
 

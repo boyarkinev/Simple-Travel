@@ -1,13 +1,13 @@
 import './Profile.css';
-import avatar from '../../images/avatar.jpg'
+import avatar from '../../images/avatar.jpg';
 
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 
 interface MyProps {
   popupVisible(): void
 }
 
-const Profile: React.FC<MyProps> = (props: PropsWithChildren<MyProps>) => {
+const Profile: React.FC<MyProps> = (props) => {
 
   const {popupVisible} = props;
 
@@ -22,7 +22,7 @@ const Profile: React.FC<MyProps> = (props: PropsWithChildren<MyProps>) => {
         <div className='user-info__data'>
           <h1 className='user-info__name'>Jaques Causteau</h1>
           <p className='user-info__job'>Sailor, Researcher</p>
-          <button className='button button__edit-profile'>Edit</button>
+          <button className="button button__edit-profile">Edit</button>
         </div>
         <button onClick={handlePopupOpen} className='button button__add-card'>
           <i className='material-icons'>add</i>
@@ -30,6 +30,6 @@ const Profile: React.FC<MyProps> = (props: PropsWithChildren<MyProps>) => {
       </div>
     </div>
   );
-}
+};
 
 export default Profile;
