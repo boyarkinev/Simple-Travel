@@ -5,8 +5,14 @@ import store from "./store/store";
 import Header from './components/Header/Header';
 import Profile from './components/Profile/Profile';
 import CardList from './components/CardList/CardList';
-import CardPopup from './components/Popups/CardPopup/CardPopup';
 import {loadDataAC} from "./store/actionCreators/actionCreators";
+import AddCardPopup from "./components/Popups/AddCardPopup/AddCardPopup";
+import EditUserPopup from "./components/Popups/EditUserPopup/EditUserPopup";
+
+type TUseState = {
+  cardPopup: boolean
+  userPopup: boolean
+}
 
 const dispatch = (action: any) => store.dispatch(action);
 
@@ -16,17 +22,25 @@ const App: React.FC = () => {
     dispatch(loadDataAC());
   }, []);
 
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isShown, setIsShown] = useState<TUseState>({cardPopup: false, userPopup: false});
 
-  const popupVisible = () =>
-    !isActive ? setIsActive(true) : setIsActive(false);
+  const addCardPopupVisible = () =>
+    !isShown.cardPopup
+      ? setIsShown({...isShown, cardPopup: true})
+      : setIsShown({...isShown, cardPopup: false});
+
+  const editUserPopupVisible = () =>
+    !isShown.userPopup
+      ? setIsShown({...isShown, userPopup: true})
+      : setIsShown({...isShown, userPopup: false});
 
   return (
     <div className='root'>
       <Header/>
-      <Profile popupVisible={popupVisible}/>
+      <Profile cardPopupVisible={addCardPopupVisible} userPopupVisible={editUserPopupVisible}/>
       <CardList/>
-      <CardPopup onShow={isActive} popupVisible={popupVisible}/>
+      <AddCardPopup onShow={isShown} cardPopupVisible={addCardPopupVisible}/>
+      <EditUserPopup onShow={isShown} userPopupVisible={editUserPopupVisible} />
     </div>
   );
 };

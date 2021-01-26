@@ -1,45 +1,48 @@
-import './UserPopup.css';
+import '../PopupStyles/PopupStyles.css';
 
 import React from 'react';
 import cn from 'classnames';
-import {IFormState} from '../../../interfaces/interfaces';
 import {bindActionCreators} from 'redux';
-import {changePlaceLinkInputAC, changePlaceNameInputAC} from '../../../store/actionCreators/actionCreators';
 import {connect} from 'react-redux';
-import UserPopupForm from "../UserPopupForm/UserPopupForm";
+
+import {IFormState} from '../../../interfaces/interfaces';
+import {changePlaceLinkInputAC, changePlaceNameInputAC} from '../../../store/actionCreators/actionCreators';
+import AddCardPopupForm from "../AddCardPopupForm/AddCardPopupForm";
 
 interface IPopupProps {
-  onShow: boolean;
-
   changePlaceName(arg: string): void;
-
   changePlacePhotoLink(arg: string): void;
-
   placeName: string;
   placePhotoLink: string;
-
-  popupVisible(): void;
+  cardPopupVisible(): void;
+  onShow: { cardPopup: boolean };
 }
 
 type TFormState = {
   popupData: IFormState;
 };
 
-const UserPopup: React.FC<IPopupProps> = (props) => {
+const AddCardPopup: React.FC<IPopupProps> = (props) => {
 
-  const {popupVisible, changePlaceName, changePlacePhotoLink, onShow} = props;
+  const {cardPopupVisible, changePlaceName, changePlacePhotoLink, onShow} = props;
 
   const handlePopupClose = () => {
     changePlaceName('');
     changePlacePhotoLink('');
-    popupVisible();
+    cardPopupVisible();
   };
 
+  const popupClasses = cn(
+    'popup', {
+      'popup_is-shown': onShow.cardPopup,
+    }
+  );
+
   return (
-    <div id='addImagePopup' className={cn('popup', {isShown: onShow})}>
+    <div className={popupClasses}>
       <div className='popup__content'>
         <i onClick={handlePopupClose} className='material-icons popup__close'>clear</i>
-        <UserPopupForm data={props}/>
+        <AddCardPopupForm data={props}/>
       </div>
     </div>
   );
@@ -59,4 +62,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPopup);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCardPopup);

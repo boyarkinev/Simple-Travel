@@ -1,45 +1,47 @@
-import './CardPopup.css';
+import '../PopupStyles/PopupStyles.css';
 
 import React from 'react';
 import cn from 'classnames';
-import CardPopupForm from '../CardPopupForm/CardPopupForm';
 import {IFormState} from '../../../interfaces/interfaces';
 import {bindActionCreators} from 'redux';
 import {changePlaceLinkInputAC, changePlaceNameInputAC} from '../../../store/actionCreators/actionCreators';
 import {connect} from 'react-redux';
+import EditUserPopupForm from "../EditUserPopupForm/EditUserPopupForm";
 
 interface IPopupProps {
-  onShow: boolean;
-
+  onShow: { userPopup: boolean };
   changePlaceName(arg: string): void;
-
   changePlacePhotoLink(arg: string): void;
-
   placeName: string;
   placePhotoLink: string;
-
-  popupVisible(): void;
+  userPopupVisible(): void;
 }
 
 type TFormState = {
   popupData: IFormState;
 };
 
-const CardPopup: React.FC<IPopupProps> = (props) => {
+const EditUserPopup: React.FC<IPopupProps> = (props) => {
 
-  const {popupVisible, changePlaceName, changePlacePhotoLink, onShow} = props;
+  const {userPopupVisible, changePlaceName, changePlacePhotoLink, onShow} = props;
 
   const handlePopupClose = () => {
     changePlaceName('');
     changePlacePhotoLink('');
-    popupVisible();
+    userPopupVisible();
   };
 
+  const popupClasses = cn(
+    'popup', {
+      'popup_is-shown': onShow.userPopup,
+    }
+  );
+
   return (
-    <div className={cn('popup', {isShown: onShow})}>
+    <div id='addImagePopup' className={popupClasses}>
       <div className='popup__content'>
         <i onClick={handlePopupClose} className='material-icons popup__close'>clear</i>
-        <CardPopupForm data={props}/>
+        <EditUserPopupForm data={props}/>
       </div>
     </div>
   );
@@ -59,4 +61,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardPopup);
+export default connect(mapStateToProps, mapDispatchToProps)(EditUserPopup);

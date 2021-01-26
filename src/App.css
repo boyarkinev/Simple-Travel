@@ -18,12 +18,18 @@
   color: white;
   outline: none;
   display: block;
+  padding: 0;
   cursor: pointer;
   transition: background-color .2s, color .3s;
 }
 
 .button:focus {
   box-shadow: 0 0 0 2px greenyellow;
+}
+
+.preloader {
+  display: flex;
+  margin: 7px auto;
 }
 
 @media screen and (max-width: 1024px) {

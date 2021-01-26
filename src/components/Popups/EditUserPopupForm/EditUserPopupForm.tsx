@@ -1,22 +1,22 @@
 import React from 'react';
 
-interface IPopupProps {
-  data: {
-    placeName: string;
-    placePhotoLink: string;
-    changePlaceName(arg: string): void;
-    changePlacePhotoLink(arg: string): void;
-    popupVisible(): void;
-  }
-}
+// interface IPopupProps {
+//   data: {
+//     placeName: string;
+//     placePhotoLink: string;
+//     changePlaceName(arg: string): void;
+//     changePlacePhotoLink(arg: string): void;
+//     userPopupVisible(): void
+//   }
+// }
 
-const UserPopupForm: React.FC<IPopupProps> = (props) => {
+const EditUserPopupForm: React.FC<any> = (props) => {
 
   return (
     <>
-      <h3 className='popup__title'>Редактировать пользователя</h3>
+      <h3 className='popup__title'>Редактировать</h3>
       <form
-        id='addImageForm'
+        id='edit-user-form'
         className='popup__form'
         noValidate
       >
@@ -25,7 +25,7 @@ const UserPopupForm: React.FC<IPopupProps> = (props) => {
             type='text'
             id='name'
             className='popup__input'
-            placeholder='Название'
+            placeholder='Имя, фамилия'
           />
           <span id='error-name' className='alert-message'></span>
         </div>
@@ -34,20 +34,18 @@ const UserPopupForm: React.FC<IPopupProps> = (props) => {
             type='url'
             id='link'
             className='popup__input'
-            placeholder='Ссылка на картинку'
+            placeholder='Род занятий или профессия'
           />
           <span id='error-link' className='alert-message'></span>
         </div>
         <button
-          id='submit-addImageForm'
+          id='submit-edit-user-form'
           type='submit'
           name='popupButton'
-          className='button popup__button'>
-          <i className='material-icons'>add</i>
-        </button>
+          className='button popup__button'>Сохранить</button>
       </form>
     </>
   );
 };
 
-export default UserPopupForm;
+export default EditUserPopupForm;

@@ -8,11 +8,11 @@
   display: none;
   align-items: center;
   justify-content: center;
+  z-index: 3;
 }
 
 .popup__content {
   width: 430px;
-  min-height: 330px;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
@@ -33,6 +33,13 @@
   margin: 0;
   font-size: 24px;
   line-height: 30px;
+}
+
+.popup__text{
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0;
 }
 
 .popup__form {
@@ -72,26 +79,42 @@
   height: 15px;
 }
 
-.popup.isShown {
+.popup.popup_is-shown {
+  display: flex;
+}
+
+.popup__button-wrapper {
   display: flex;
 }
 
 .popup__button {
   width: 100%;
-  height: 50px;
   border: 1px solid rgba(0, 0, 0, .2);
-  margin-top: 48px;
   color: white;
   background-color: black;
 }
 
-#addImageForm .popup__button {
-  font-size: 36px;
+.popup__button-wrapper .popup__button {
+  height: 38px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
-#editUserForm .popup__button {
+.popup__button-wrapper .popup__button:last-of-type {
+  margin-right: 0;
+}
+
+#add-image-form .popup__button {
+  font-size: 36px;
+  height: 50px;
+  margin-top: 28px;
+}
+
+#edit-user-form .popup__button {
   font-size: 18px;
   line-height: 22px;
+  height: 50px;
+  margin-top: 28px;
 }
 
 .popup__button:disabled {
@@ -99,8 +122,30 @@
   background-color: transparent;
 }
 
+.popup-card {
+  background-color: #fff;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.popup-card__image {
+  max-width: 80vw;
+  max-height: 80vh;
+  display: block;
+  object-fit: cover;
+}
+
+.popup__preloader-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 28px;
+}
+
 @media screen and (max-width: 540px) {
   .popup__content {
+    width: calc(100% - 60px);
+  }
+  .popup-card {
     width: calc(100% - 60px);
   }
 }

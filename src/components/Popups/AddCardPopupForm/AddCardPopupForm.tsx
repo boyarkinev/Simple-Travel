@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import {putDataToDB} from '../../../services/api.service';
+import preloader from '../../../images/preloader-white.svg';
+
 import store from "../../../store/store";
+import {putDataToDB} from '../../../services/api.service';
 import {loadDataAC} from "../../../store/actionCreators/actionCreators";
 
 interface IPopupProps {
@@ -10,20 +12,23 @@ interface IPopupProps {
     placePhotoLink: string;
     changePlaceName(arg: string): void;
     changePlacePhotoLink(arg: string): void;
-    popupVisible(): void;
-  }
+    cardPopupVisible(): void;
+  },
 }
 
 const dispatch = (action: any) => store.dispatch(action);
 
-const CardPopupForm: React.FC<IPopupProps> = (props) => {
+const AddCardPopupForm: React.FC<IPopupProps> = (props) => {
+
   const {
     placeName,
     placePhotoLink,
     changePlaceName,
     changePlacePhotoLink,
-    popupVisible,
+    cardPopupVisible,
   } = props.data;
+
+  const [isFetching, setIsFetching] = useState<boolean>(false)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.target.id === 'name' && changePlaceName(event.target.value);
@@ -32,6 +37,7 @@ const CardPopupForm: React.FC<IPopupProps> = (props) => {
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsFetching(true);
     await putDataToDB({
       placeName,
       placePhotoLink,
@@ -40,15 +46,16 @@ const CardPopupForm: React.FC<IPopupProps> = (props) => {
     });
     changePlaceName('');
     changePlacePhotoLink('');
-    popupVisible();
+    cardPopupVisible();
     dispatch(loadDataAC());
+    setIsFetching(false);
   };
 
   return (
     <>
       <h3 className='popup__title'>Новая карточка</h3>
       <form
-        id='addImageForm'
+        id='add-image-form'
         className='popup__form'
         onSubmit={handleFormSubmit}
         noValidate
@@ -76,16 +83,17 @@ const CardPopupForm: React.FC<IPopupProps> = (props) => {
           <span id='error-link' className='alert-message'></span>
         </div>
         <button
-          // onClick={handleButtonClick}
-          id='submit-addImageForm'
+          id='submit-add-image-form'
           type='submit'
           name='popupButton'
           className='button popup__button'>
-          <i className='material-icons'>add</i>
+          { isFetching ?
+            <img src={preloader} alt='Preloader' className='preloader' />
+            : <i className='material-icons'>add</i> }
         </button>
       </form>
     </>
   );
 };
 
-export default CardPopupForm;
+export default AddCardPopupForm;
