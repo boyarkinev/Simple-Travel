@@ -6,9 +6,19 @@ export interface ICardData {
   id: string;
 }
 
-export interface IFormState {
+export interface IUserData {
+  name: string;
+  job: string;
+}
+
+export interface ICardFormState {
   placeName: string;
   placePhotoLink: string;
+}
+
+export interface IUserFormState {
+  userName: string;
+  userJob: string;
 }
 
 export interface IAction {
@@ -18,4 +28,8 @@ export interface IAction {
 
 export interface ICardsDataState {
   places: Array<ICardData>;
+}
+
+export interface IUserDataState {
+  user: IUserData
 }

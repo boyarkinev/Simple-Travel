@@ -5,7 +5,7 @@ import cn from 'classnames';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {IFormState} from '../../../interfaces/interfaces';
+import {ICardFormState} from '../../../interfaces/interfaces';
 import {changePlaceLinkInputAC, changePlaceNameInputAC} from '../../../store/actionCreators/actionCreators';
 import AddCardPopupForm from "../AddCardPopupForm/AddCardPopupForm";
 
@@ -19,7 +19,7 @@ interface IPopupProps {
 }
 
 type TFormState = {
-  popupData: IFormState;
+  cardData: ICardFormState;
 };
 
 const AddCardPopup: React.FC<IPopupProps> = (props) => {
@@ -50,8 +50,8 @@ const AddCardPopup: React.FC<IPopupProps> = (props) => {
 
 const mapStateToProps = (state: TFormState) => {
   return {
-    placeName: state.popupData.placeName,
-    placePhotoLink: state.popupData.placePhotoLink,
+    placeName: state.cardData.placeName,
+    placePhotoLink: state.cardData.placePhotoLink,
   };
 };
 

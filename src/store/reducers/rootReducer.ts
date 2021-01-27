@@ -1,10 +1,14 @@
 import {combineReducers} from 'redux';
-import changeInputsReducer from './changeInputsReducer';
-import cardsReducer from './cardsReducer';
+import changePlacesPopupInputsReducer from './changePlacesPopupInputsReducer';
+import placesServerDataReducer from './placesServerDataReducer';
+import changeUserPopupInputsReducer from './changeUserPopupInputsReducer';
+import userStorageDataReducer from './userStorageDataReducer';
 
 const rootReducer = combineReducers({
-  popupData: changeInputsReducer,
-  placesData: cardsReducer,
+  cardData: changePlacesPopupInputsReducer,
+  placesServerData: placesServerDataReducer,
+  userData: changeUserPopupInputsReducer,
+  userStorageData: userStorageDataReducer
 });
 
 export default rootReducer;

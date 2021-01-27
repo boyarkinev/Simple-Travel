@@ -5,7 +5,7 @@ const initialState: ICardsDataState = {
   places: [],
 };
 
-const cardsReducer = (state: ICardsDataState = initialState, action: IAction) => {
+const placesServerDataReducer = (state: ICardsDataState = initialState, action: IAction) => {
   switch (action.type) {
     case FETCH_DATA_ACTION:
       return {...state, places: action.payload};
@@ -14,4 +14,4 @@ const cardsReducer = (state: ICardsDataState = initialState, action: IAction) =>
   }
 };
 
-export default cardsReducer;
+export default placesServerDataReducer;

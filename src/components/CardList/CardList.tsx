@@ -5,7 +5,7 @@ import Card from '../Card/Card';
 import {connect} from 'react-redux';
 
 interface IMyState {
-  placesData: ICardsDataState;
+  placesServerData: ICardsDataState;
 }
 
 interface IMyProps {
@@ -25,7 +25,7 @@ const CardList: React.FC<IMyProps> = ({places} ) => {
 
 const mapStateToProps = (state: IMyState) => {
   return {
-    places: state.placesData.places,
+    places: state.placesServerData.places,
   };
 };
 

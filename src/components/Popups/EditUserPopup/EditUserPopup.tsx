@@ -2,32 +2,30 @@ import '../PopupStyles/PopupStyles.css';
 
 import React from 'react';
 import cn from 'classnames';
-import {IFormState} from '../../../interfaces/interfaces';
+import {IUserFormState} from '../../../interfaces/interfaces';
 import {bindActionCreators} from 'redux';
-import {changePlaceLinkInputAC, changePlaceNameInputAC} from '../../../store/actionCreators/actionCreators';
+import {changeUserJobInputAC, changeUserNameInputAC} from '../../../store/actionCreators/actionCreators';
 import {connect} from 'react-redux';
 import EditUserPopupForm from "../EditUserPopupForm/EditUserPopupForm";
 
 interface IPopupProps {
   onShow: { [key: string]: boolean };
-  changePlaceName(arg: string): void;
-  changePlacePhotoLink(arg: string): void;
-  placeName: string;
-  placePhotoLink: string;
+  changeUserName(arg: string): void;
+  changeUserJob(arg: string): void;
+  userName: string;
+  userJob: string;
   userPopupVisible(): void;
 }
 
 type TFormState = {
-  popupData: IFormState;
+  userData: IUserFormState;
 };
 
 const EditUserPopup: React.FC<IPopupProps> = (props) => {
 
-  const {userPopupVisible, changePlaceName, changePlacePhotoLink, onShow} = props;
+  const {userPopupVisible, onShow} = props;
 
   const handlePopupClose = () => {
-    changePlaceName('');
-    changePlacePhotoLink('');
     userPopupVisible();
   };
 
@@ -49,15 +47,15 @@ const EditUserPopup: React.FC<IPopupProps> = (props) => {
 
 const mapStateToProps = (state: TFormState) => {
   return {
-    placeName: state.popupData.placeName,
-    placePhotoLink: state.popupData.placePhotoLink,
+    userName: state.userData.userName,
+    userJob: state.userData.userJob,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    changePlaceName: bindActionCreators(changePlaceNameInputAC, dispatch),
-    changePlacePhotoLink: bindActionCreators(changePlaceLinkInputAC, dispatch),
+    changeUserName: bindActionCreators(changeUserNameInputAC, dispatch),
+    changeUserJob: bindActionCreators(changeUserJobInputAC, dispatch),
   };
 };
 
