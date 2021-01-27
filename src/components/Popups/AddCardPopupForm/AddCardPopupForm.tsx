@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import preloader from '../../../images/preloader-white.svg';
 
-import store from "../../../store/store";
+import store from '../../../store/store';
 import {putDataToDB} from '../../../services/api.service';
-import {loadDataAC} from "../../../store/actionCreators/actionCreators";
+import {loadDataAC} from '../../../store/actionCreators/actionCreators';
 
 interface IPopupProps {
   data: {
@@ -28,11 +28,46 @@ const AddCardPopupForm: React.FC<IPopupProps> = (props) => {
     cardPopupVisible,
   } = props.data;
 
-  const [isFetching, setIsFetching] = useState<boolean>(false)
+  const [isDirty, setIsDirty] = useState<{ [key: string]: boolean }>({name: false, link: false});
+  const [isError, setIsError] = useState<{ [key: string]: string }>({name: 'Поле должно содержать слово', link: 'Поле должно содержать ссылку'});
+  const [isValid, setIsValid] = useState<boolean>(false)
+
+  useEffect(() => {
+    (isError.name || isError.link)
+      ? setIsValid(false)
+      : setIsValid(true)
+  }, [isError.name, isError.link])
+
+  const blurHandler = (event: any) => {
+    switch (event.target.name) {
+      case 'placeName':
+        setIsDirty({...isDirty, name: true});
+        break
+      case 'placePhotoLink':
+        setIsDirty({...isDirty, link: true});
+        break
+    }
+  }
+
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    event.target.id === 'name' && changePlaceName(event.target.value);
-    event.target.id === 'link' && changePlacePhotoLink(event.target.value);
+    switch (event.target.name) {
+      case 'placeName':
+        changePlaceName(event.target.value);
+        const nameRegex = /([A-Za-z]|[А-ЯЁа-яё])/gi
+        !nameRegex.test(event.target.value)
+          ? setIsError({...isError, name: 'Введите корректное название'})
+          : setIsError({...isError, name: ''})
+        break
+      case 'placePhotoLink':
+        changePlacePhotoLink(event.target.value);
+        const linkRegex = /(^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$)/
+        !linkRegex.test(event.target.value)
+          ? setIsError({...isError, link: 'Введите корректную ссылку'})
+          : setIsError({...isError, link: ''})
+        break
+    }
   };
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -61,35 +96,43 @@ const AddCardPopupForm: React.FC<IPopupProps> = (props) => {
         noValidate
       >
         <div className='popup__input-container'>
+          <div className='alert-message'>
+            {(isDirty.name && isError.name) && <span>{isError.name}</span>}
+          </div>
           <input
-            onChange={handleInputChange}
+            name='placeName'
+            onChange={(event) => handleInputChange(event)}
+            onBlur={(event) => blurHandler(event)}
             value={placeName}
             type='text'
-            id='name'
             className='popup__input'
             placeholder='Название'
           />
-          <span id='error-name' className='alert-message'></span>
         </div>
         <div className='popup__input-container'>
+          <div className='alert-message'>
+            {(isDirty.link && isError.link) && <span>{isError.link}</span>}
+          </div>
           <input
-            onChange={handleInputChange}
+            name='placePhotoLink'
+            onChange={(event) => handleInputChange(event)}
+            onBlur={(event) => blurHandler(event)}
             value={placePhotoLink}
             type='url'
-            id='link'
             className='popup__input'
             placeholder='Ссылка на картинку'
           />
-          <span id='error-link' className='alert-message'></span>
         </div>
         <button
           id='submit-add-image-form'
           type='submit'
           name='popupButton'
-          className='button popup__button'>
-          { isFetching ?
-            <img src={preloader} alt='Preloader' className='preloader' />
-            : <i className='material-icons'>add</i> }
+          className='button popup__button'
+          disabled={!isValid}
+        >
+          {isFetching ?
+            <img src={preloader} alt='Preloader' className='preloader'/>
+            : <i className='material-icons'>add</i>}
         </button>
       </form>
     </>

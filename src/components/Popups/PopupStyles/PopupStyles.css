@@ -43,7 +43,7 @@
 }
 
 .popup__form {
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 .popup__form:last-child {
@@ -58,11 +58,16 @@
   width: 100%;
   height: 47px;
   border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  border-bottom: 2px solid rgba(0, 0, 0, .2);
   font-size: 14px;
   line-height: 17px;
   box-sizing: border-box;
-  padding: 5px 6px 13px;
+  padding: 5px 6px 5px;
+  outline: none;
+}
+
+.popup__input:focus {
+  border-bottom: 2px solid green;
 }
 
 .popup__input:last-of-type {
@@ -74,7 +79,8 @@
   font-size: 12px;
   line-height: 15px;
   padding: 3px 0 0 5px;
-  margin-bottom: 14px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   display: block;
   height: 15px;
 }
@@ -107,7 +113,7 @@
 #add-image-form .popup__button {
   font-size: 36px;
   height: 50px;
-  margin-top: 28px;
+  margin-top: 48px;
 }
 
 #edit-user-form .popup__button {
@@ -118,8 +124,8 @@
 }
 
 .popup__button:disabled {
-  color: rgba(0, 0, 0, .2);
-  background-color: transparent;
+  border: 1px solid transparent;
+  background-color: rgba(0, 0, 0, .7);
 }
 
 .popup-card {

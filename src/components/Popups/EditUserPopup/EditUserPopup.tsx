@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import EditUserPopupForm from "../EditUserPopupForm/EditUserPopupForm";
 
 interface IPopupProps {
-  onShow: { userPopup: boolean };
+  onShow: { [key: string]: boolean };
   changePlaceName(arg: string): void;
   changePlacePhotoLink(arg: string): void;
   placeName: string;

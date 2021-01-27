@@ -10,8 +10,7 @@ import AddCardPopup from "./components/Popups/AddCardPopup/AddCardPopup";
 import EditUserPopup from "./components/Popups/EditUserPopup/EditUserPopup";
 
 type TUseState = {
-  cardPopup: boolean
-  userPopup: boolean
+  [key: string]: boolean
 }
 
 const dispatch = (action: any) => store.dispatch(action);

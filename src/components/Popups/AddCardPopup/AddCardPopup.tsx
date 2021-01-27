@@ -15,7 +15,7 @@ interface IPopupProps {
   placeName: string;
   placePhotoLink: string;
   cardPopupVisible(): void;
-  onShow: { cardPopup: boolean };
+  onShow: { [key: string]: boolean };
 }
 
 type TFormState = {

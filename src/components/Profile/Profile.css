@@ -54,13 +54,14 @@
   background-color: transparent;
   border: 1px solid white;
   color: white;
-  width: 38px;
-  height: 18px;
+  width: fit-content;
+  height: fit-content;
   font-size: 12px;
   line-height: 15px;
   display: block;
   cursor: pointer;
   margin-top: 20px;
+  padding: 2px 5px;
 }
 
 .button__add-card:hover,

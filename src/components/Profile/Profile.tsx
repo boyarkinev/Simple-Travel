@@ -25,9 +25,9 @@ const Profile: React.FC<MyProps> = (props) => {
       <div className='user-info'>
         <img src={avatar} alt='Avatar' className='user-info__photo'/>
         <div className='user-info__data'>
-          <h1 className='user-info__name'>Jaques Causteau</h1>
-          <p className='user-info__job'>Sailor, Researcher</p>
-          <button onClick={handleUserPopupOpen} className="button button__edit-profile">Edit</button>
+          <h1 className='user-info__name'>Иван Сусанин</h1>
+          <p className='user-info__job'>Волонтёр, проводник</p>
+          <button onClick={handleUserPopupOpen} className="button button__edit-profile">Редактировать</button>
         </div>
         <button onClick={handleCardPopupOpen} className='button button__add-card'>
           <i className='material-icons'>add</i>
