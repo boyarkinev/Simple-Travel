@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { setDataToLocalStorage } from '../../../services/localStorage.service';
 import {loadStorageDataAC} from '../../../store/actionCreators/actionCreators';
 import store from '../../../store/store';
 import {connect} from 'react-redux';
+import preloader from '../../../images/preloader-white.svg';
 
 interface IPopupProps {
   data: {
@@ -12,10 +13,6 @@ interface IPopupProps {
     changeUserJob(arg: string): void;
     userPopupVisible(): void
   },
-  user: {
-    name: string;
-    job: string;
-  }
 }
 
 const dispatch = (action: any) => store.dispatch(action);
@@ -23,22 +20,55 @@ const dispatch = (action: any) => store.dispatch(action);
 const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
 
   const {userName, userJob, changeUserName, changeUserJob, userPopupVisible} = props.data
-  const {name, job} = props.user
+
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [isDirty, setIsDirty] = useState<{ [key: string]: boolean }>({name: false, link: false});
+  const [isError, setIsError] = useState<{ [key: string]: string }>({name: 'Поле не должно быть пустым', job: 'Поле не должно быть пустым'});
+  const [isValid, setIsValid] = useState<boolean>(false)
+
+  useEffect(() => {
+    (isError.name || isError.job)
+      ? setIsValid(false)
+      : setIsValid(true)
+  }, [isError.name, isError.job])
+
+  const blurHandler = (event: any) => {
+    switch (event.target.name) {
+      case 'userName':
+        setIsDirty({...isDirty, name: true});
+        break
+      case 'userJob':
+        setIsDirty({...isDirty, job: true});
+        break
+    }
+  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     switch (event.target.name) {
       case 'userName':
-        return changeUserName(event.target.value)
+        changeUserName(event.target.value)
+        const nameRegex = /([A-Za-z]|[А-ЯЁа-яё])/gi
+        !nameRegex.test(event.target.value)
+          ? setIsError({...isError, name: 'Введите корректное имя'})
+          : setIsError({...isError, name: ''})
+          break
       case 'userJob':
-        return changeUserJob(event.target.value)
+        changeUserJob(event.target.value)
+        const jobRegex = /([A-Za-z]|[А-ЯЁа-яё])/gi
+        !jobRegex.test(event.target.value)
+          ? setIsError({...isError, job: 'Введите корректную информацию'})
+          : setIsError({...isError, job: ''})
+          break
     }
   }
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsFetching(true)
     setDataToLocalStorage(userName, userJob)
     dispatch(loadStorageDataAC())
     userPopupVisible()
+    setIsFetching(false)
   }
 
   return (
@@ -51,10 +81,11 @@ const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
       >
         <div className='popup__input-container'>
           <div className='alert-message'>
-            <span></span>
+            {(isDirty.name && isError.name) && <span>{isError.name}</span>}
           </div>
           <input
             onChange={handleInputChange}
+            onBlur={blurHandler}
             value={userName}
             type='text'
             name='userName'
@@ -64,10 +95,11 @@ const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
         </div>
         <div className='popup__input-container'>
           <div className='alert-message'>
-            <span></span>
+            {(isDirty.job && isError.name) && <span>{isError.job}</span>}
           </div>
           <input
             onChange={handleInputChange}
+            onBlur={blurHandler}
             value={userJob}
             type='text'
             name='userJob'
@@ -76,10 +108,13 @@ const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
           />
         </div>
         <button
-          id='submit-edit-user-form'
+          disabled={!isValid}
           type='submit'
           name='popupButton'
-          className='button popup__button'>Сохранить</button>
+          className='button popup__button'>
+          {isFetching ?
+            <img src={preloader} alt='Preloader' className='preloader'/>
+            : 'Сохранить'}</button>
       </form>
     </>
   );
