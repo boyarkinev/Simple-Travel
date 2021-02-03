@@ -1,7 +1,8 @@
 import '../PopupStyles/PopupStyles.css';
+import cn from 'classnames';
 
 import React from 'react';
-import cn from 'classnames';
+import {createPortal} from 'react-dom';
 import {IUserFormState} from '../../../interfaces/interfaces';
 import {bindActionCreators} from 'redux';
 import {changeUserJobInputAC, changeUserNameInputAC} from '../../../store/actionCreators/actionCreators';
@@ -15,6 +16,7 @@ interface IPopupProps {
   userName: string;
   userJob: string;
   userPopupVisible(): void;
+  divRef: any
 }
 
 type TFormState = {
@@ -23,10 +25,11 @@ type TFormState = {
 
 const EditUserPopup: React.FC<IPopupProps> = (props) => {
 
-  const {userPopupVisible, onShow} = props;
+  const {userPopupVisible, onShow, divRef} = props;
 
   const handlePopupClose = () => {
     userPopupVisible();
+    divRef.current.parentElement.removeChild(divRef.current);
   };
 
   const popupClasses = cn(
@@ -35,13 +38,13 @@ const EditUserPopup: React.FC<IPopupProps> = (props) => {
     }
   );
 
-  return (
+  return createPortal(
     <div id='addImagePopup' className={popupClasses}>
       <div className='popup__content'>
         <i onClick={handlePopupClose} className='material-icons popup__close'>clear</i>
         <EditUserPopupForm data={props}/>
       </div>
-    </div>
+    </div>, divRef.current
   );
 };
 

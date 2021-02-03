@@ -1,7 +1,8 @@
 import '../PopupStyles/PopupStyles.css';
+import cn from 'classnames';
 
 import React from 'react';
-import cn from 'classnames';
+import {createPortal} from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
@@ -16,6 +17,7 @@ interface IPopupProps {
   placePhotoLink: string;
   cardPopupVisible(): void;
   onShow: { [key: string]: boolean };
+  divRef: any;
 }
 
 type TFormState = {
@@ -24,13 +26,7 @@ type TFormState = {
 
 const AddCardPopup: React.FC<IPopupProps> = (props) => {
 
-  const {cardPopupVisible, changePlaceName, changePlacePhotoLink, onShow} = props;
-
-  const handlePopupClose = () => {
-    changePlaceName('');
-    changePlacePhotoLink('');
-    cardPopupVisible();
-  };
+  const {cardPopupVisible, changePlaceName, changePlacePhotoLink, onShow, divRef} = props;
 
   const popupClasses = cn(
     'popup', {
@@ -38,13 +34,20 @@ const AddCardPopup: React.FC<IPopupProps> = (props) => {
     }
   );
 
-  return (
+  const handlePopupClose = () => {
+    changePlaceName('');
+    changePlacePhotoLink('');
+    cardPopupVisible();
+    divRef.current.parentElement.removeChild(divRef.current);
+  };
+
+  return createPortal(
     <div className={popupClasses}>
       <div className='popup__content'>
         <i onClick={handlePopupClose} className='material-icons popup__close'>clear</i>
-        <AddCardPopupForm data={props}/>
+        <AddCardPopupForm data={props} />
       </div>
-    </div>
+    </div>, divRef.current
   );
 };
 

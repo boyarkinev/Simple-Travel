@@ -14,8 +14,8 @@ import DeleteAlertPopup from "../Popups/DeleteAlertPopup/DeleteAlertPopup";
 type TProps = { data: ICardData }
 
 type TUseState = {
-  imagePopup: boolean
-  alertPopup: boolean
+  imagePopup: boolean;
+  alertPopup: boolean;
 }
 
 const dispatch = (action: IAction) => store.dispatch(action);

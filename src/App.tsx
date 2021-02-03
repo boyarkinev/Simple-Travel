@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import store from './store/store';
 import Header from './components/Header/Header';
 import Profile from './components/Profile/Profile';
@@ -16,6 +16,12 @@ type TUseState = {
 const dispatch = (action: any) => store.dispatch(action);
 
 const App: React.FC = () => {
+
+  const divRef = useRef(document.createElement('div'));
+
+  const createModalContainer = () => {
+    document.body.appendChild(divRef.current);
+  }
 
   useEffect(() => {
     dispatch(loadDataAC());
@@ -40,10 +46,19 @@ const App: React.FC = () => {
   return (
     <div className='root'>
       <Header/>
-      <Profile cardPopupVisible={addCardPopupVisible} userPopupVisible={editUserPopupVisible}/>
-      <CardList/>
-      <AddCardPopup onShow={isShown} cardPopupVisible={addCardPopupVisible}/>
-      <EditUserPopup onShow={isShown} userPopupVisible={editUserPopupVisible}/>
+      <Profile
+        cardPopupVisible={addCardPopupVisible}
+        userPopupVisible={editUserPopupVisible}
+        createModalContainer={createModalContainer} />
+      <CardList />
+      <AddCardPopup
+        onShow={isShown}
+        cardPopupVisible={addCardPopupVisible}
+        divRef={divRef} />
+      <EditUserPopup
+        onShow={isShown}
+        userPopupVisible={editUserPopupVisible}
+        divRef={divRef} />
     </div>
   );
 };

@@ -13,6 +13,7 @@ interface IPopupProps {
     changePlaceName(arg: string): void;
     changePlacePhotoLink(arg: string): void;
     cardPopupVisible(): void;
+    divRef: any
   },
 }
 
@@ -26,6 +27,7 @@ const AddCardPopupForm: React.FC<IPopupProps> = (props) => {
     changePlaceName,
     changePlacePhotoLink,
     cardPopupVisible,
+    divRef
   } = props.data;
 
   const [isDirty, setIsDirty] = useState<{ [key: string]: boolean }>({name: false, link: false});
@@ -38,7 +40,7 @@ const AddCardPopupForm: React.FC<IPopupProps> = (props) => {
       : setIsValid(true)
   }, [isError.name, isError.link])
 
-  const blurHandler = (event: any) => {
+  const handleOnBlur = (event: any) => {
     switch (event.target.name) {
       case 'placeName':
         setIsDirty({...isDirty, name: true});
@@ -84,6 +86,7 @@ const AddCardPopupForm: React.FC<IPopupProps> = (props) => {
     cardPopupVisible();
     dispatch(loadDataAC());
     setIsFetching(false);
+    divRef.current.parentElement.removeChild(divRef.current);
   };
 
   return (
@@ -102,7 +105,7 @@ const AddCardPopupForm: React.FC<IPopupProps> = (props) => {
           <input
             name='placeName'
             onChange={(event) => handleInputChange(event)}
-            onBlur={(event) => blurHandler(event)}
+            onBlur={(event) => handleOnBlur(event)}
             value={placeName}
             type='text'
             className='popup__input'
@@ -116,7 +119,7 @@ const AddCardPopupForm: React.FC<IPopupProps> = (props) => {
           <input
             name='placePhotoLink'
             onChange={(event) => handleInputChange(event)}
-            onBlur={(event) => blurHandler(event)}
+            onBlur={(event) => handleOnBlur(event)}
             value={placePhotoLink}
             type='url'
             className='popup__input'

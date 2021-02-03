@@ -10,20 +10,23 @@ interface MyProps {
   user: {
     [key: string]: string
   }
+  createModalContainer: () => void;
 }
 
 const Profile: React.FC<MyProps> = (props) => {
 
   const {name, job} = props.user
 
-  const {cardPopupVisible, userPopupVisible} = props;
+  const {cardPopupVisible, userPopupVisible, createModalContainer} = props;
 
   const handleCardPopupOpen = () => {
     cardPopupVisible();
+    createModalContainer();
   };
 
   const handleUserPopupOpen = () => {
     userPopupVisible();
+    createModalContainer();
   };
 
   return (

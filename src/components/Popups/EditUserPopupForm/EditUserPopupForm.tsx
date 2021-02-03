@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { setDataToLocalStorage } from '../../../services/localStorage.service';
+import {setDataToLocalStorage} from '../../../services/localStorage.service';
 import {loadStorageDataAC} from '../../../store/actionCreators/actionCreators';
 import store from '../../../store/store';
 import {connect} from 'react-redux';
@@ -11,7 +11,8 @@ interface IPopupProps {
     userJob: string;
     changeUserName(arg: string): void;
     changeUserJob(arg: string): void;
-    userPopupVisible(): void
+    userPopupVisible(): void;
+    divRef: any;
   },
 }
 
@@ -19,7 +20,7 @@ const dispatch = (action: any) => store.dispatch(action);
 
 const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
 
-  const {userName, userJob, changeUserName, changeUserJob, userPopupVisible} = props.data
+  const {userName, userJob, changeUserName, changeUserJob, userPopupVisible, divRef} = props.data
 
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [isDirty, setIsDirty] = useState<{ [key: string]: boolean }>({name: false, link: false});
@@ -32,7 +33,7 @@ const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
       : setIsValid(true)
   }, [isError.name, isError.job])
 
-  const blurHandler = (event: any) => {
+  const handleOnBlur = (event: any) => {
     switch (event.target.name) {
       case 'userName':
         setIsDirty({...isDirty, name: true});
@@ -65,10 +66,11 @@ const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsFetching(true)
-    setDataToLocalStorage(userName, userJob)
-    dispatch(loadStorageDataAC())
-    userPopupVisible()
-    setIsFetching(false)
+    setDataToLocalStorage(userName, userJob);
+    dispatch(loadStorageDataAC());
+    userPopupVisible();
+    setIsFetching(false);
+    divRef.current.parentElement.removeChild(divRef.current);
   }
 
   return (
@@ -85,7 +87,7 @@ const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
           </div>
           <input
             onChange={handleInputChange}
-            onBlur={blurHandler}
+            onBlur={handleOnBlur}
             value={userName}
             type='text'
             name='userName'
@@ -99,7 +101,7 @@ const EditUserPopupForm: React.FC<IPopupProps> = (props) => {
           </div>
           <input
             onChange={handleInputChange}
-            onBlur={blurHandler}
+            onBlur={handleOnBlur}
             value={userJob}
             type='text'
             name='userJob'
