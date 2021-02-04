@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import preloader from '../../images/preloader-red.svg'
 
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import store from "../../store/store";
 import {IAction, ICardData} from '../../interfaces/interfaces';
 import { patchLikesDataToDB} from "../../services/api.service";
@@ -21,6 +21,8 @@ type TUseState = {
 const dispatch = (action: IAction) => store.dispatch(action);
 
 const Card: React.FC<TProps> = (props) => {
+
+  const divRef = useRef(document.createElement('div'));
 
   const {placeName, placePhotoLink, id, likesCount} = props.data;
 
@@ -49,11 +51,13 @@ const Card: React.FC<TProps> = (props) => {
     setIsFetching(true)
     await patchLikesDataToDB(event.target.closest('.place-card').id, newLikesCount);
     dispatch(loadDataAC());
-    setIsFetching(false)
+    setIsFetching(false);
+    document.body.appendChild(divRef.current);
   };
 
   const handleImageClick = () => {
-    changeImagePopupVisible()
+    changeImagePopupVisible();
+    document.body.appendChild(divRef.current);
   };
 
   const likesCountShow = cn(
@@ -106,8 +110,12 @@ const Card: React.FC<TProps> = (props) => {
         name={placeName}
         onShow={isShown}
         changeImagePopupVisible={changeImagePopupVisible}
+        divRef={divRef}
       />
-      <DeleteAlertPopup onShow={isShown} alertPopupVisible={alertPopupVisible} />
+      <DeleteAlertPopup
+        onShow={isShown}
+        alertPopupVisible={alertPopupVisible}
+      />
     </div>
   );
 };
