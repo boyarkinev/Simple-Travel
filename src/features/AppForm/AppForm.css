@@ -1,0 +1,7 @@
+.app__form {
+  margin-top: 30px;
+}
+
+.app__form:last-child {
+  margin-bottom: 0;
+}

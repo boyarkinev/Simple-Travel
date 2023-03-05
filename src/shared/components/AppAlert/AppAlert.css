@@ -1,0 +1,8 @@
+.app-alert__message {
+  display: block;
+  height: 18px;
+  color: var(--app-color-active);
+  font-size: 12px;
+  line-height: 15px;
+  padding: 3px 5px 0;
+}

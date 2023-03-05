@@ -1,19 +1,28 @@
+import './index.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import store from './store/store';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import { initializeApp } from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+import { App } from './app/App';
+import { store } from './store/store';
+
+initializeApp({
+	apiKey: 'AIzaSyCekvADkTcxKUJcuPS6dJ2fPgLpM4huJak',
+	authDomain: 'vmesto-project.firebaseapp.com',
+	databaseURL: 'https://vmesto-project-default-rtdb.firebaseio.com',
+	projectId: 'vmesto-project',
+	storageBucket: 'vmesto-project.appspot.com',
+	messagingSenderId: '577881227987',
+	appId: '1:577881227987:web:db37558d37cd2fa3808a26',
+});
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App/>
-  </Provider>,
-  document.getElementById('root')
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

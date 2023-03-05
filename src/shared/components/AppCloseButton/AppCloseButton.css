@@ -1,0 +1,8 @@
+.app-close-button {
+  position: absolute;
+  font-size: 32px;
+  color: #fff;
+  top: -26px;
+  right: -26px;
+  cursor: pointer;
+}

@@ -1,0 +1,29 @@
+.profile {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.profile-button__wrapper {
+  position: absolute;
+  right: 0;
+}
+
+.user-info {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  color: white;
+  width: 100%;
+}
+
+@media screen and (max-width: 980px) {
+  .user-info {
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-button__wrapper {
+    position: static;
+    margin-bottom: 40px;
+  }
+}

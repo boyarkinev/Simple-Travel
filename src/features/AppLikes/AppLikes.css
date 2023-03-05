@@ -1,0 +1,6 @@
+.app-likes-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  align-items: center;
+}

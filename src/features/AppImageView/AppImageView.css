@@ -1,0 +1,31 @@
+.app-view-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.app-view-image__card {
+  background-color: #fff;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.app-view-image__card-image {
+  max-width: 80vw;
+  max-height: 80vh;
+  display: block;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 540px) {
+  .app-view-image__card {
+    width: calc(100% - 60px);
+  }
+}

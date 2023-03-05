@@ -1,0 +1,17 @@
+.alert__text {
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0;
+}
+
+.alert__preloader-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 28px;
+}
+
+.alert__button-wrapper {
+  display: flex;
+  gap: 10px;
+}
