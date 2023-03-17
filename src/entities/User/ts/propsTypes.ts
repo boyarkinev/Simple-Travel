@@ -1,6 +1,6 @@
-import { IUserData } from '@/shared/ts/interfaces';
+import { sharedInterfaces } from '@/shared';
 
 export interface IUserProps {
-	user: IUserData;
+	user: sharedInterfaces.IUserData;
 	onEdit: () => void;
 }

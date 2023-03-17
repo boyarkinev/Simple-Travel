@@ -1,13 +1,15 @@
-import {
-	ICardsAction,
-	IImageViewAction,
-	ILoadAction,
-	IWarningDataAction,
-} from '@/shared/ts/interfaces';
+import { sharedInterfaces } from '@/shared';
 import { ACTIONS } from '../actions/actions';
-import { ImageDataInstance, warningDataInstance } from '../instances/instances';
+import {
+	ImageDataInitial,
+	popupInitial,
+	warningDataInitial,
+} from '../initials/initials';
 
-export const placesReducer = (state = [], action: ICardsAction) => {
+export const placesReducer = (
+	state = [],
+	action: sharedInterfaces.ICardsAction
+) => {
 	switch (action.type) {
 		case ACTIONS.LOADING_CARDS:
 			return action.payload;
@@ -16,7 +18,10 @@ export const placesReducer = (state = [], action: ICardsAction) => {
 	}
 };
 
-export const isLoadingReducer = (state = false, action: ILoadAction) => {
+export const isLoadingReducer = (
+	state = false,
+	action: sharedInterfaces.ILoadAction
+) => {
 	switch (action.type) {
 		case ACTIONS.IS_LOADING:
 			return action.payload;
@@ -26,28 +31,59 @@ export const isLoadingReducer = (state = false, action: ILoadAction) => {
 };
 
 export const imageViewReducer = (
-	state = ImageDataInstance,
-	action: IImageViewAction
+	state = ImageDataInitial,
+	action: sharedInterfaces.IImageViewAction
 ) => {
 	switch (action.type) {
 		case ACTIONS.IMAGE_VIEW_DATA:
 			return action.payload;
 		case ACTIONS.CLEAR_IMAGE_VIEW_DATA:
-			return ImageDataInstance;
+			return ImageDataInitial;
 		default:
 			return state;
 	}
 };
 
 export const warningDataReducer = (
-	state = warningDataInstance,
-	action: IWarningDataAction
+	state = warningDataInitial,
+	action: sharedInterfaces.IWarningDataAction
 ) => {
 	switch (action.type) {
 		case ACTIONS.WARNING_DATA:
 			return action.payload;
 		case ACTIONS.CLEAR_WARNING_DATA:
-			return warningDataInstance;
+			return warningDataInitial;
+		default:
+			return state;
+	}
+};
+
+export const popupDataReducer = (
+	state = popupInitial,
+	action: { type: string; payload: sharedInterfaces.IPopupData }
+) => {
+	switch (action.type) {
+		case ACTIONS.POPUP_FORM_DATA:
+			return action.payload;
+		case ACTIONS.CLEAR_POPUP_FORM_DATA:
+			return popupInitial;
+		default:
+			return state;
+	}
+};
+
+const popupFormMessageInitial = {
+	text: '',
+	isShow: false,
+};
+
+export const popupFormMessageReducer = (
+	state = popupFormMessageInitial,
+	action: { type: string; payload: sharedInterfaces.IPopupFormMessage }
+) => {
+	switch (action.type) {
+		case ACTIONS.POPUP_FORM_MESSAGE:
+			return action.payload;
 		default:
 			return state;
 	}

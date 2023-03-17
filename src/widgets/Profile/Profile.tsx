@@ -3,18 +3,18 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { AppClassicButton } from '@/shared';
-import { User, Avatar, userData } from '@/entities';
+import { User, Avatar, userSelectors } from '@/entities';
 import { IProfileProps } from './ts/propsTypes';
 
 export const Profile: React.FC<IProfileProps> = props => {
 	const { cardPopupHandler, userPopupHandler } = props;
 
-	const user = useSelector(userData);
+	const user = useSelector(userSelectors.userData);
 
 	const avatar = {
-		image: user.avatar,
-		width: '150px',
-		height: '150px',
+		image: user.photoURL,
+		width: 'var(--app-avatar-size)',
+		height: 'var(--app-avatar-size)',
 	};
 
 	return (

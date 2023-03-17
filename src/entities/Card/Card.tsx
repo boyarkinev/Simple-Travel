@@ -4,16 +4,20 @@ import { useDispatch } from 'react-redux';
 import cn from 'classnames';
 
 import { AppLikes } from '@/features';
-import { AppIconButton, actions, thunks } from '@/shared';
-import { ICardData } from '@/shared/ts/interfaces';
+import {
+	AppIconButton,
+	sharedActions,
+	sharedInterfaces,
+	sharedThunks,
+} from '@/shared';
 
 const {
 	setImageViewDataAC,
 	setWarningDataAC,
 	clearImageViewDataAC,
 	clearWarningDataAC,
-} = actions;
-const { deleteDataThunk, patchLikesThunk } = thunks;
+} = sharedActions;
+const { deleteDataThunk, patchLikesThunk } = sharedThunks;
 
 /**
  * @name Card
@@ -22,7 +26,9 @@ const { deleteDataThunk, patchLikesThunk } = thunks;
  * @param data Данные карточки
  * @returns
  */
-export const Card: React.FC<{ data: ICardData }> = ({ data }) => {
+export const Card: React.FC<{ data: sharedInterfaces.ICardData }> = ({
+	data,
+}) => {
 	const { placeName, placePhotoLink, id, likesCount } = data;
 
 	const dispatch = useDispatch();

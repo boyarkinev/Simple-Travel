@@ -23,7 +23,7 @@ export const AppInput: React.FC<IInputProps> = ({
 	return (
 		<>
 			{isShowAlerts ? (
-				<AppAlert value={inputValue} name={input.name} regex={input.regex} />
+				<AppAlert value={inputValue} regex={input.regex} error={input.error} />
 			) : null}
 			<input
 				className='app-input'

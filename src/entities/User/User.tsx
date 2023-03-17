@@ -7,8 +7,9 @@ import { IUserProps } from './ts/propsTypes';
 export const User: React.FC<IUserProps> = ({ user, onEdit }) => {
 	return (
 		<div className='user__data'>
-			<h1 className='user__name'>{user.name}</h1>
-			<p className='user__occupation'>{user.occupation}</p>
+			<h1 className='user__name'>{user.displayName}</h1>
+			{user.hobby ? <p className='user__occupation'>{user.hobby}</p> : null}
+			{/* {user.isAuth ? ( */}
 			<AppClassicButton
 				type='button'
 				buttonStyle='outline'
@@ -21,6 +22,7 @@ export const User: React.FC<IUserProps> = ({ user, onEdit }) => {
 				label='Редактировать'
 				onClick={onEdit}
 			/>
+			{/* ) : null} */}
 		</div>
 	);
 };

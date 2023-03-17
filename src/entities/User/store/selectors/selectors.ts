@@ -1,3 +1,5 @@
-import { IUserData } from '@/shared/ts/interfaces';
+import { sharedInterfaces } from '@/shared';
 
-export const userData = (state: { userData: IUserData }) => state.userData;
+export const userData = (state: sharedInterfaces.IState) => state.userData;
+export const isRegistration = (state: sharedInterfaces.IState) =>
+	state.isRegistration;

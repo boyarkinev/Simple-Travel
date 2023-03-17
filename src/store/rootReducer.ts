@@ -1,16 +1,14 @@
 import { combineReducers } from 'redux';
-import { userDataReducer } from '@/entities/User/store/reducers/reducers';
-import {
-	imageViewReducer,
-	isLoadingReducer,
-	placesReducer,
-	warningDataReducer,
-} from '@/shared/store/reducers/reducers';
+import { userReducers } from '@/entities';
+import { sharedReducers } from '@/shared';
 
 export const rootReducer = combineReducers({
-	isLoading: isLoadingReducer,
-	places: placesReducer,
-	imageView: imageViewReducer,
-	warningData: warningDataReducer,
-	userData: userDataReducer,
+	isLoading: sharedReducers.isLoadingReducer,
+	places: sharedReducers.placesReducer,
+	imageView: sharedReducers.imageViewReducer,
+	warningData: sharedReducers.warningDataReducer,
+	popupData: sharedReducers.popupDataReducer,
+	popupFormMessage: sharedReducers.popupFormMessageReducer,
+	userData: userReducers.userDataReducer,
+	isRegistration: userReducers.userRegistrationReducer,
 });

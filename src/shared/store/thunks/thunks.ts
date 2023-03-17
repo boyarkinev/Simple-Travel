@@ -1,5 +1,5 @@
+import { sharedActions, sharedInterfaces } from '@/shared';
 import { apiServices } from '@/shared/api/api.service';
-import { ICardData } from '@/shared/ts/interfaces';
 import {
 	clearWarningDataAC,
 	setCardsAC,
@@ -10,28 +10,26 @@ export const getDataThunk = () => {
 	return (dispatch: React.Dispatch<React.SetStateAction<object>>): void => {
 		apiServices.getCards().then(res => {
 			if (res !== null) {
-				const places: Array<ICardData> = Object.keys(res).map((key: string) => {
-					const place = res[key];
-					place.id = key;
-					return place;
-				});
+				const places: Array<sharedInterfaces.ICardData> = Object.keys(res).map(
+					(key: string) => {
+						const place = res[key];
+						place.id = key;
+						return place;
+					}
+				);
 				dispatch(setCardsAC(places));
 			}
 		});
 	};
 };
 
-export const putDataThunk = (
-	placeName: string,
-	placePhotoLink: string,
-	setIsPopupShow: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-	return (dispatch: React.Dispatch<React.SetStateAction<object>>): void => {
+export const putDataThunk = (placeName: string, placeLink: string) => {
+	return (dispatch: React.Dispatch<React.SetStateAction<{}>>): void => {
 		dispatch(setIsLoadingAC(true));
 		apiServices
 			.putCard({
 				placeName,
-				placePhotoLink,
+				placeLink,
 				date: new Date().toLocaleDateString(),
 				likesCount: 0,
 			})
@@ -41,7 +39,7 @@ export const putDataThunk = (
 			.catch(err => console.error(err))
 			.finally(() => {
 				dispatch(setIsLoadingAC(false));
-				setIsPopupShow(false);
+				dispatch(sharedActions.clearPopupFormDataAC());
 			});
 	};
 };

@@ -1,7 +1,16 @@
-.app__form {
+.app-form {
   margin-top: 30px;
 }
 
-.app__form:last-child {
+.app-form:last-child {
   margin-bottom: 0;
+}
+
+.app-form__message {
+  font-size: var(--app-font-size-small);
+  line-height: var(--app-line-height-small);
+  color: var(--app-color-active);
+  text-align: center;
+  margin: 0;
+  margin-top: var(--app-space-large);
 }

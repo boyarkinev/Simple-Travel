@@ -1,14 +1,10 @@
-import { IImageViewData, IWarningData } from '@/shared/ts/interfaces';
+import { sharedInterfaces } from '@/shared';
 
-interface IState {
-	isLoading: boolean;
-	places: [];
-	userStorageData: {};
-	imageView: IImageViewData;
-	warningData: IWarningData;
-}
-
-export const isLoading = (state: IState) => state.isLoading;
-export const places = (state: IState) => state.places;
-export const imageView = (state: IState) => state.imageView;
-export const warningData = (state: IState) => state.warningData;
+export const isLoading = (state: sharedInterfaces.IState) => state.isLoading;
+export const places = (state: sharedInterfaces.IState) => state.places;
+export const imageView = (state: sharedInterfaces.IState) => state.imageView;
+export const warningData = (state: sharedInterfaces.IState) =>
+	state.warningData;
+export const popupData = (state: sharedInterfaces.IState) => state.popupData;
+export const popupFormMessage = (state: sharedInterfaces.IState) =>
+	state.popupFormMessage;

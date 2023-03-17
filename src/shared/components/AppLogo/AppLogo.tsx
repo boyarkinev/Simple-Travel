@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const AppLogo: React.FC<{ [key: string]: string }> = ({ fill }) => {
+export const AppLogo: React.FC<IKeyString> = ({ fill }) => {
 	return (
 		<svg
 			width='148'

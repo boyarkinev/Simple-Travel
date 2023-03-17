@@ -1,5 +1,5 @@
-import { ICardData } from '@/shared/ts/interfaces';
+import { sharedInterfaces } from '@/shared';
 
 export interface ICardListProps {
-	places: Array<ICardData>;
+	places: Array<sharedInterfaces.ICardData>;
 }

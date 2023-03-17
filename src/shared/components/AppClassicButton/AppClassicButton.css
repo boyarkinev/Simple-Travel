@@ -3,6 +3,7 @@
   height: 50px;
   color: var(--app-light-active);
   background-color: var(--app-dark-active);
+  padding: 5px 10px;
   cursor: pointer;
   transition: background-color .3s, color .3s;
 }
@@ -24,9 +25,13 @@
   color: var(--app-dark-active);
 }
 
+.app-classic-button_outlined:disabled {
+  color: var(--app-light-disabled);
+}
+
 .app-classic-button__label {
-  font-size: var(--app-paragraph-font-medium);
-  line-height: var(--app-paragraph-height-medium);
+  font-size: var( --app-font-size-large);
+  line-height: var(--app-line-height-large);
 }
 
 .app-classic-button:disabled {

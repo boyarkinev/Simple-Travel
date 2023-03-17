@@ -2,14 +2,13 @@ import './AppAlert.css';
 
 import React, { useEffect, useState } from 'react';
 import { IAppAlertProps } from './ts/propsTypes';
-import { ERROR_MESSAGES as messages } from './constants/ERROR_MESSAGES';
 
-export const AppAlert: React.FC<IAppAlertProps> = ({ value, regex, name }) => {
-	const [error, setError] = useState<string>('');
+export const AppAlert: React.FC<IAppAlertProps> = ({ value, regex, error }) => {
+	const [errorMsg, setErrorMsg] = useState<string>('');
 	const [isDirty, setIsDirty] = useState<boolean>(false);
 
 	useEffect(() => {
-		setError(!regex.test(value) ? messages[name] : '');
+		setErrorMsg(!regex.test(value) ? error : '');
 	}, [value]);
 
 	useEffect(() => {
@@ -18,7 +17,7 @@ export const AppAlert: React.FC<IAppAlertProps> = ({ value, regex, name }) => {
 
 	return (
 		<div className='app-alert__message'>
-			{isDirty && error && <span>{error}</span>}
+			{isDirty && error && <span>{errorMsg}</span>}
 		</div>
 	);
 };

@@ -1,7 +1,9 @@
-import { IFormData } from '@/shared/ts/interfaces';
+import { sharedInterfaces } from '@/shared';
 
 export interface IPopupFormProps {
-	inputs: Array<IFormData>;
-	setIsPopupShow: React.Dispatch<React.SetStateAction<boolean>>;
+	inputs: Array<sharedInterfaces.IFormData>;
 	buttonLabel: React.ReactNode;
+	onSubmit: (param: sharedInterfaces.IKeyString) => void;
+	checkBox?: sharedInterfaces.ICheckBox;
+	message?: sharedInterfaces.IPopupFormMessage;
 }

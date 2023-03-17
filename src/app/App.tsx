@@ -1,73 +1,77 @@
 import './App.css';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Header, CardList, Profile } from '@/widgets';
 import { AppForm, AppImageView, AppWarning } from '@/features';
 import {
 	AppCloseButton,
 	AppModal,
-	selectors,
-	thunks,
-	template,
+	sharedActions,
+	sharedSelectors,
+	sharedThunks,
 } from '@/shared';
+import { Header, CardList, Profile } from '@/widgets';
+import { cardTemplates, userTemplates } from '@/entities';
+
+const {
+	places,
+	imageView,
+	warningData,
+	isLoading,
+	popupData,
+	popupFormMessage,
+} = sharedSelectors;
+const { setPopupFormDataAC, clearPopupFormDataAC } = sharedActions;
 
 export const App: React.FC = () => {
 	const dispatch = useDispatch();
-	const cards = useSelector(selectors.places);
-	const imageViewData = useSelector(selectors.imageView);
-	const warning = useSelector(selectors.warningData);
-	const isDataDeleting = useSelector(selectors.isLoading);
-
-	const [isPopupShow, setIsPopupShow] = useState<boolean>(false);
-	const [formName, setFormName] = useState<string | null>(null);
-	const [popupTitle, setPopupTitle] = useState<string>('');
+	const cards = useSelector(places);
+	const imageViewData = useSelector(imageView);
+	const warning = useSelector(warningData);
+	const isDataDeleting = useSelector(isLoading);
+	const popup = useSelector(popupData);
+	const formMessage = useSelector(popupFormMessage);
 
 	useEffect(() => {
-		dispatch(thunks.getDataThunk());
+		dispatch(sharedThunks.getDataThunk());
 	}, []);
 
-	const handleShowPlacePopup = () => {
-		setPopupTitle('Новое место');
-		setFormName('place');
-		setIsPopupShow(true);
-	};
+	const userPopup = useMemo(() => {
+		return userTemplates.userPopupData(dispatch);
+	}, []);
 
-	const handleShowUserPopup = () => {
-		setPopupTitle('Редактировать профиль');
-		setFormName('user');
-		setIsPopupShow(true);
-	};
+	const placePopup = useMemo(() => {
+		return cardTemplates.placePopupData(
+			dispatch,
+			<i className='material-icons'>add</i>
+		);
+	}, []);
 
 	return (
 		<div className='app'>
 			<Header />
 			<Profile
-				cardPopupHandler={handleShowPlacePopup}
-				userPopupHandler={handleShowUserPopup}
+				cardPopupHandler={() => dispatch(setPopupFormDataAC(placePopup))}
+				userPopupHandler={() => dispatch(setPopupFormDataAC(userPopup))}
 			/>
 			<CardList places={cards} />
+
 			<AppModal
-				title={<h3 className='app-title'>{popupTitle}</h3>}
-				condition={isPopupShow}
+				title={<h3 className='app-title'>{popup.title}</h3>}
+				condition={popup.condition}
 				closePopupButton={
-					<AppCloseButton onClose={() => setIsPopupShow(false)} />
+					<AppCloseButton onClose={() => dispatch(clearPopupFormDataAC())} />
 				}>
-				{formName === 'place' ? (
-					<AppForm
-						inputs={template.placeInputsData}
-						setIsPopupShow={setIsPopupShow}
-						buttonLabel={<i className='material-icons'>add</i>}
-					/>
-				) : null}
-				{formName === 'user' ? (
-					<AppForm
-						inputs={template.userInputsData}
-						setIsPopupShow={setIsPopupShow}
-						buttonLabel={<p className='app-classic-button__label'>Сохранить</p>}
-					/>
-				) : null}
+				<AppForm
+					inputs={popup.formData}
+					onSubmit={popup.onSubmit}
+					buttonLabel={
+						<span className='app-classic-button__label'>{popup.button}</span>
+					}
+					checkBox={popup.checkBox}
+					message={formMessage}
+				/>
 			</AppModal>
 			<AppImageView
 				link={imageViewData.link}

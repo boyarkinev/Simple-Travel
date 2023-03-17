@@ -13,15 +13,21 @@ export { AppInput } from './components/AppInput/AppInput';
 export { AppAlert } from './components/AppAlert/AppAlert';
 export { AppIconButton } from './components/AppIconButton/AppIconButton';
 export { AppImage } from './components/AppImage/AppImage';
+export { AppCheckBox } from './components/AppCheckBox/AppCheckBox';
 
 // Константы
 export { VALIDATION_REGEX } from './constants/VALIDATION_REGEX';
+export { ERROR_MESSAGES } from './constants/ERROR_MESSAGES';
+
+// Типизация
+export * as sharedInterfaces from './ts/interfaces';
+export * as sharedTypes from './ts/types';
 
 // Хранилище
-export * as actions from './store/actions/actions';
-export * as reducers from './store/reducers/reducers';
-export * as selectors from './store/selectors/selectors';
-export * as thunks from './store/thunks/thunks';
+export * as sharedActions from './store/actions/actions';
+export * as sharedReducers from './store/reducers/reducers';
+export * as sharedSelectors from './store/selectors/selectors';
+export * as sharedThunks from './store/thunks/thunks';
 
 // Шаблоны
-export * as template from './templates/place-inputs-data';
+export * as template from './templates/templates';

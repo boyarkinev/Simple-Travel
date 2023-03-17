@@ -4,8 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { initializeApp } from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
 
 import { App } from './app/App';
 import { store } from './store/store';

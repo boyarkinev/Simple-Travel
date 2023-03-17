@@ -3,11 +3,17 @@
   flex-direction: column;
   align-items: center;
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  min-width: 150px;
+  width: 120px;
+  height: var(--app-avatar-size);
+  min-width: var(--app-avatar-size);
   overflow: hidden;
   position: relative;
+}
+
+.avatar__guest {
+  font-size: 150px;
+  line-height: 125px;
+  color: var(--app-dark-disabled);
 }
 
 @media screen and (max-width: 980px) {

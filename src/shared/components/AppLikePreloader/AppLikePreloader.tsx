@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const AppLikePreloader: React.FC<{ [key: string]: string }> = ({
+export const AppLikePreloader: React.FC<IKeyString> = ({
 	width = '28px',
 	height = '28px',
 	fill = 'var(--app-dark-active)',

@@ -1,56 +1,73 @@
 import './AppForm.css';
 
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import {
+	AppCheckBox,
 	AppClassicButton,
 	AppInput,
 	AppPreloader,
-	selectors,
-	thunks,
+	sharedInterfaces,
+	sharedSelectors,
 } from '@/shared';
-import { IOnValue } from '@/shared/ts/interfaces';
 import { IPopupFormProps } from './ts/propsTypes';
 
 export const AppForm: React.FC<IPopupFormProps> = ({
 	inputs,
-	setIsPopupShow,
 	buttonLabel,
+	onSubmit,
+	checkBox,
+	message,
 }) => {
-	const dispatch = useDispatch();
+	const isDataUploading = useSelector(sharedSelectors.isLoading);
 
-	const isDataUploading = useSelector(selectors.isLoading);
+	const [isValid, setIsValid] = useState<sharedInterfaces.IKeyBool>({});
+	const [values, setValues] = useState<sharedInterfaces.IKeyString>({});
+	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-	const [isValid, setIsValid] = useState<{ [key: string]: boolean }>({});
-	const [values, setValues] = useState<{ [key: string]: string }>({});
+	useEffect(() => {
+		setIsDisabled(!Object.values(isValid).every(el => el === true));
+	}, [isValid]);
 
-	const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		dispatch(
-			thunks.putDataThunk(values.placeName, values.placeLink, setIsPopupShow)
-		);
+	const handleValue = (obj: sharedInterfaces.IOnValue) => {
+		setIsValid((prev: sharedInterfaces.IKeyBool) => ({
+			...prev,
+			[obj.name]: obj.regex.test(obj.value),
+		}));
+		setValues(prev => ({ ...prev, [obj.name]: obj.value }));
 	};
 
 	return (
-		<form className='app__form' onSubmit={handleFormSubmit} noValidate>
+		<form
+			className='app-form'
+			onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+				event.preventDefault();
+				onSubmit(values);
+			}}
+			noValidate>
 			{inputs?.map(input => (
 				<AppInput
 					key={input.name}
 					input={input}
-					onValue={(obj: IOnValue) => {
-						setIsValid((prev: { [key: string]: boolean }) => ({
-							...prev,
-							[obj.name]: obj.regex.test(obj.value),
-						}));
-						setValues(prev => ({ ...prev, [obj.name]: obj.value }));
-					}}
 					isShowAlerts={true}
+					onValue={(obj: sharedInterfaces.IOnValue) => handleValue(obj)}
 				/>
 			))}
+			{checkBox?.isShow ? (
+				<AppCheckBox
+					label={checkBox.label}
+					onChange={bool =>
+						setValues(prev => ({ ...prev, isChecked: `${Number(bool)}` }))
+					}
+				/>
+			) : null}
+			{message?.isShow ? (
+				<p className='app-form__message'>{message.text}</p>
+			) : null}
 			<AppClassicButton
-				isDisabled={!Object.values(isValid).every(el => el === true)}
-				style={{ marginTop: '48px' }}
+				isDisabled={isDisabled}
+				style={{ marginTop: '36px' }}
 				label={isDataUploading ? <AppPreloader /> : buttonLabel}
 			/>
 		</form>

@@ -1,0 +1,14 @@
+.app-checkbox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.app-checkbox__label {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--app-dark-active);
+  margin: 0;
+}

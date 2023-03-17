@@ -23,10 +23,19 @@ code {
   --app-h3-size: 24px;
   --app-h3-height: 30px;
 
-  --app-paragraph-font-medium: 18px;
-  --app-paragraph-height-medium: 24px;
+  --app-font-size-small: 14px;
+  --app-line-height-small: 18px;
+  --app-font-size-medium: 16px;
+  --app-line-height-medium: 20px;
+  --app-font-size-large: 18px;
+  --app-line-height-large: 22px;
+
+  --app-space-small: 5px;
+  --app-space-medium: 10px;
+  --app-space-large: 20px;
 
   --app-light-active: white;
+  --app-light-disabled: rgb(50, 50, 50);
   --app-dark-active: black;
   --app-dark-hover: rgb(55, 55, 55);
   --app-dark-disabled: rgb(100, 100, 100);
@@ -34,6 +43,8 @@ code {
   --app-color-hover: rgb(220, 55, 90);
   --app-color-disabled: rgb(217, 100, 124);
   --app-focus-active: green;
+
+  --app-avatar-size: 140px;
 }
 
 * {

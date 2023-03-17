@@ -15,7 +15,7 @@ export const AppModal: React.FC<IPopupProps> = ({
 				<div className='app-modal'>
 					<div className='app-modal__content'>
 						{closePopupButton}
-						{title}
+						{title ? title : null}
 						{children}
 					</div>
 				</div>
