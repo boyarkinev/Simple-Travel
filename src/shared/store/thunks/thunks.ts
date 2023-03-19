@@ -31,7 +31,7 @@ export const putDataThunk = (placeName: string, placeLink: string) => {
 				placeName,
 				placeLink,
 				date: new Date().toLocaleDateString(),
-				likesCount: 0,
+				likesUsers: [],
 			})
 			.then(() => {
 				dispatch(getDataThunk());
@@ -62,13 +62,13 @@ export const deleteDataThunk = (placeId: string) => {
 
 export const patchLikesThunk = (
 	placeId: string,
-	likesCount: number,
+	likes: Array<string>,
 	setIsFetch: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
 	return (dispatch: React.Dispatch<React.SetStateAction<object>>): void => {
 		setIsFetch(true);
 		apiServices
-			.patchLikes(placeId, likesCount)
+			.patchLikes(placeId, likes)
 			.then(() => {
 				dispatch(getDataThunk());
 			})

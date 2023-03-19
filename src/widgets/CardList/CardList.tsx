@@ -10,7 +10,7 @@ export const CardList: React.FC<ICardListProps> = ({ places }) => {
 	return (
 		<div className='places-list app__section'>
 			{places.map((card: sharedInterfaces.ICardData) => (
-				<Card data={card} key={card.id} />
+				<Card card={card} key={card.id} />
 			))}
 		</div>
 	);

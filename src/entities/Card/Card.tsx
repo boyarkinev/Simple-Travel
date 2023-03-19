@@ -1,9 +1,9 @@
 import './Card.css';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import cn from 'classnames';
+import React, { useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AppLikes } from '@/features';
+import { userSelectors } from '@/entities';
 import {
 	AppIconButton,
 	sharedActions,
@@ -11,13 +11,9 @@ import {
 	sharedThunks,
 } from '@/shared';
 
-const {
-	setImageViewDataAC,
-	setWarningDataAC,
-	clearImageViewDataAC,
-	clearWarningDataAC,
-} = sharedActions;
-const { deleteDataThunk, patchLikesThunk } = sharedThunks;
+const { setImageViewDataAC, setWarningDataAC, clearImageViewDataAC } =
+	sharedActions;
+const { patchLikesThunk } = sharedThunks;
 
 /**
  * @name Card
@@ -26,39 +22,43 @@ const { deleteDataThunk, patchLikesThunk } = sharedThunks;
  * @param data Данные карточки
  * @returns
  */
-export const Card: React.FC<{ data: sharedInterfaces.ICardData }> = ({
-	data,
+export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
+	card,
 }) => {
-	const { placeName, placePhotoLink, id, likesCount } = data;
+	const { placeName, placeLink, id, likesUsers } = card;
 
+	const user = useSelector(userSelectors.userData);
 	const dispatch = useDispatch();
 
 	const [isFetch, setIsFetch] = useState<boolean>(false);
 
 	const handleLikeButtonClick = (): void => {
-		const count = 1;
-		let newLikesCount = likesCount + count;
-		dispatch(patchLikesThunk(id, newLikesCount, setIsFetch));
+		let likes: Array<string> = [];
+		if (!likesUsers?.includes(user.uid)) {
+			likesUsers ? (likes = [...likesUsers, user.uid]) : (likes = [user.uid]);
+		}
+		if (likesUsers?.includes(user.uid)) {
+			likes = [...likesUsers.filter(uid => uid !== user.uid)];
+		}
+		dispatch(patchLikesThunk(id, likes, setIsFetch));
 	};
 
-	const likesCountShow = cn('place-card__like-count', {
-		'place-card__like-count_show': likesCount !== 0,
-	});
-
-	const warningButtons = [
-		{
-			name: 'delete',
-			label: 'Удалить',
-			type: 'submit',
-			onClick: () => dispatch(deleteDataThunk(id)),
-		},
-		{
-			name: 'Cancel',
-			label: 'Отмена',
-			type: 'button',
-			onClick: () => dispatch(clearWarningDataAC()),
-		},
-	];
+	const warningButtons = useMemo(() => {
+		return [
+			{
+				name: 'delete',
+				label: 'Удалить',
+				type: 'submit',
+				onClick: () => dispatch(sharedThunks.deleteDataThunk(id)),
+			},
+			{
+				name: 'Cancel',
+				label: 'Отмена',
+				type: 'button',
+				onClick: () => dispatch(sharedActions.clearWarningDataAC()),
+			},
+		];
+	}, [id]);
 
 	return (
 		<div className='place-card' id={id}>
@@ -67,7 +67,7 @@ export const Card: React.FC<{ data: sharedInterfaces.ICardData }> = ({
 					onClick={() => {
 						dispatch(
 							setImageViewDataAC({
-								link: placePhotoLink,
+								link: placeLink,
 								name: placeName,
 								onClose: () => dispatch(clearImageViewDataAC()),
 								showCondition: true,
@@ -75,7 +75,7 @@ export const Card: React.FC<{ data: sharedInterfaces.ICardData }> = ({
 						);
 					}}
 					className='place-card__image'
-					src={placePhotoLink}
+					src={placeLink}
 					alt={placeName}
 				/>
 				<AppIconButton
@@ -97,8 +97,7 @@ export const Card: React.FC<{ data: sharedInterfaces.ICardData }> = ({
 					<AppLikes
 						onLike={handleLikeButtonClick}
 						isFetch={isFetch}
-						likesCount={likesCount}
-						likesCountView={likesCountShow}
+						likesCount={likesUsers?.length || 0}
 					/>
 				</div>
 			</div>

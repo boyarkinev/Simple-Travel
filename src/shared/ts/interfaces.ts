@@ -12,9 +12,9 @@ export interface IKeyStrBoolNum {
 
 export interface ICardData {
 	placeName: string;
-	placePhotoLink: string;
+	placeLink: string;
 	date: string;
-	likesCount: number;
+	likesUsers: Array<string>;
 	id: string;
 }
 

@@ -8,7 +8,6 @@ export const AppLikes: React.FC<IAppLikesProps> = ({
 	onLike,
 	isFetch,
 	likesCount,
-	likesCountView,
 }) => {
 	return (
 		<div className='app-likes-wrapper'>
@@ -22,7 +21,9 @@ export const AppLikes: React.FC<IAppLikesProps> = ({
 					)
 				}
 			/>
-			<p className={likesCountView}>{likesCount}</p>
+			{likesCount > 0 ? (
+				<p className='place-card__like-count'>{likesCount}</p>
+			) : null}
 		</div>
 	);
 };

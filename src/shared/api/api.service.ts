@@ -16,9 +16,9 @@ export const apiServices = {
 		return instanceAxios.delete(`/places/${place}.json`);
 	},
 
-	patchLikes(place: string, likesCount: number) {
+	patchLikes(place: string, likes: Array<string>) {
 		return instanceAxios.patch(`/places/${place}.json`, {
-			likesCount,
+			likesUsers: likes,
 		});
 	},
 };

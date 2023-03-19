@@ -11,7 +11,7 @@ export const placesReducer = (
 	action: sharedInterfaces.ICardsAction
 ) => {
 	switch (action.type) {
-		case ACTIONS.LOADING_CARDS:
+		case ACTIONS.CARDS:
 			return action.payload;
 		default:
 			return state;
