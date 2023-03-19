@@ -74,6 +74,7 @@ export const popupDataReducer = (
 
 const popupFormMessageInitial = {
 	text: '',
+	textColor: null,
 	isShow: false,
 };
 

@@ -63,7 +63,9 @@ export const AppForm: React.FC<IPopupFormProps> = ({
 				/>
 			) : null}
 			{message?.isShow ? (
-				<p className='app-form__message'>{message.text}</p>
+				<p className='app-form__message' style={{ color: message.textColor }}>
+					{message.text}
+				</p>
 			) : null}
 			<AppClassicButton
 				isDisabled={isDisabled}

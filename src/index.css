@@ -39,9 +39,9 @@ code {
   --app-dark-active: black;
   --app-dark-hover: rgb(55, 55, 55);
   --app-dark-disabled: rgb(100, 100, 100);
-  --app-color-active: rgb(220, 20, 60);
-  --app-color-hover: rgb(220, 55, 90);
-  --app-color-disabled: rgb(217, 100, 124);
+  --app-alert-active: rgb(220, 20, 60);
+  --app-alert-hover: rgb(220, 55, 90);
+  --app-alert-disabled: rgb(217, 100, 124);
   --app-focus-active: green;
 
   --app-avatar-size: 140px;

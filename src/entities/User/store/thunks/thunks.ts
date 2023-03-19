@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth';
 import { sharedActions, sharedTypes } from '@/shared';
 import { clearRegistrationAC, setUserDataAC } from '../actions/actions';
-import { userTemplates } from '@/entities';
+import { REQUESTS_ERRORS, userHelpers, userTemplates } from '@/entities';
 
 const {
 	setIsLoadingAC,
@@ -16,7 +16,7 @@ const {
 } = sharedActions;
 
 export function signUpUserThunk(email: string, password: string) {
-	console.log('signUpUserThunk');
+	console.log('SignUpUser');
 	const auth = getAuth();
 	return (dispatch: sharedTypes.TDispatch): void => {
 		dispatch(setIsLoadingAC(true));
@@ -25,6 +25,13 @@ export function signUpUserThunk(email: string, password: string) {
 				const user = userCredential.user;
 				console.log('🚀 ~ user', user);
 				dispatch(clearPopupFormDataAC());
+				dispatch(
+					popupFormMessageAC({
+						text: 'Вы успешно зарегистрировались. \n Заполните ваши данные и авторизуйтесь',
+						textColor: 'var(--app-focus-active)',
+						isShow: true,
+					})
+				);
 				dispatch(setPopupFormDataAC(userTemplates.userPopupData(dispatch)));
 			})
 			.catch(error => {
@@ -32,10 +39,10 @@ export function signUpUserThunk(email: string, password: string) {
 				console.log('🚀 ~ errorCode', errorCode);
 				const errorMessage = error.message;
 				console.log('🚀 ~ errorMessage', errorMessage);
-				if (errorCode === 'auth/email-already-in-use') {
+				if (errorCode === REQUESTS_ERRORS.USER_ALREADY_EXIST) {
 					dispatch(
 						popupFormMessageAC({
-							text: 'Данный E-Mail уже зарегистрирован.',
+							text: 'Такой E-Mail уже зарегистрирован.',
 							isShow: true,
 						})
 					);
@@ -49,7 +56,7 @@ export function signUpUserThunk(email: string, password: string) {
 }
 
 export function signInUserThunk(email: string, password: string) {
-	console.log('signInUserThunk');
+	console.log('SignInUser');
 	const auth = getAuth();
 	return (dispatch: sharedTypes.TDispatch): void => {
 		dispatch(setIsLoadingAC(true));
@@ -59,27 +66,25 @@ export function signInUserThunk(email: string, password: string) {
 				if (!user.displayName && !user.photoURL) {
 					dispatch(setPopupFormDataAC(userTemplates.userPopupData(dispatch)));
 				}
-				dispatch(
-					setUserDataAC({
-						isAuth: true,
-						accessToken: user.accessToken,
-						uid: user.uid,
-						displayName: user.displayName,
-						hobby: '',
-						email: user.email,
-						photoURL: user.photoURL,
-					})
-				);
+				dispatch(setUserDataAC(userHelpers.setUserDataHelper(user)));
+				dispatch(clearPopupFormDataAC());
 			})
 			.catch(error => {
 				const errorCode = error.code;
 				console.log('🚀 ~ errorCode', errorCode);
 				const errorMessage = error.message;
 				console.log('🚀 ~ errorMessage', errorMessage);
+				if (errorCode === REQUESTS_ERRORS.USER_NOT_FOUND) {
+					dispatch(
+						popupFormMessageAC({
+							text: 'Пользователя с таким e-mail не существует.',
+							isShow: true,
+						})
+					);
+				}
 			})
 			.finally(() => {
 				dispatch(setIsLoadingAC(false));
-				dispatch(clearPopupFormDataAC());
 			});
 	};
 }
@@ -87,6 +92,7 @@ export function signInUserThunk(email: string, password: string) {
 export function updateUserThunk(displayName: string, photoURL: string) {
 	const auth = getAuth();
 	const { currentUser } = auth;
+	console.log('🚀 ~ currentUser', currentUser);
 	return (dispatch: sharedTypes.TDispatch): void => {
 		dispatch(setIsLoadingAC(true));
 		if (currentUser !== null) {
@@ -95,7 +101,8 @@ export function updateUserThunk(displayName: string, photoURL: string) {
 				photoURL,
 			})
 				.then(() => {
-					// Profile updated!
+					console.log('Profile updated!');
+					dispatch(setUserDataAC(userHelpers.setUserDataHelper(currentUser)));
 				})
 				.catch(error => {
 					console.error('🚀 ~ error', error);

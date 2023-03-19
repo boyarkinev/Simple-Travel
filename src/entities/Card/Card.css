@@ -54,7 +54,7 @@
 
 .place-card:hover .place-card__delete {
   display: flex;
-  color: var(--app-color-hover);
+  color: var(--app-alert-hover);
 }
 
 .place-card__description {

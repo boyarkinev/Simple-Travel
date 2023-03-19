@@ -12,7 +12,13 @@ import {
 	sharedThunks,
 } from '@/shared';
 import { Header, CardList, Profile } from '@/widgets';
-import { cardTemplates, userTemplates } from '@/entities';
+import {
+	cardTemplates,
+	userActions,
+	userHelpers,
+	userTemplates,
+} from '@/entities';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const {
 	places,
@@ -33,12 +39,27 @@ export const App: React.FC = () => {
 	const popup = useSelector(popupData);
 	const formMessage = useSelector(popupFormMessage);
 
+	const auth = getAuth();
+
+	useEffect(() => {
+		onAuthStateChanged(auth, user => {
+			if (user) {
+				dispatch(
+					userActions.setUserDataAC(userHelpers.setUserDataHelper(user))
+				);
+			} else {
+				console.log('Не авторизован');
+				// Здесь вызывать popup с сообщением, что не авторизован
+			}
+		});
+	}, [auth]);
+
 	useEffect(() => {
 		dispatch(sharedThunks.getDataThunk());
 	}, []);
 
 	const userPopup = useMemo(() => {
-		return userTemplates.userPopupData(dispatch);
+		return userTemplates.updateUserPopupData(dispatch);
 	}, []);
 
 	const placePopup = useMemo(() => {

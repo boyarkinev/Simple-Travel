@@ -43,13 +43,11 @@ export interface IWarningData {
 }
 
 export interface IUserData {
-	isAuth: boolean;
-	accessToken: string;
+	accessToken?: string;
 	uid: string;
-	displayName?: string;
-	email: string;
-	hobby?: string;
-	photoURL?: string;
+	displayName: string | null;
+	email: string | null;
+	photoURL: string | null;
 }
 
 export interface IUserDataAction {
@@ -102,6 +100,7 @@ export interface IPopupData {
 
 export interface IPopupFormMessage {
 	text: string;
+	textColor?: string;
 	isShow: boolean;
 }
 

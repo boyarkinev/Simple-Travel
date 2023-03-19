@@ -1,6 +1,6 @@
 export interface IAppAvatarProps {
 	avatar: {
-		image: string | undefined;
+		image: string | null;
 		width: string;
 		height: string;
 	};

@@ -7,7 +7,21 @@ export const userPopupData: (
 	return {
 		title: 'Заполните профиль',
 		condition: true,
-		button: 'Изменить',
+		button: 'Авторизоваться',
+		onSubmit: data => {
+			dispatch(userThunks.updateUserThunk(data.userName, data.photoURL));
+		},
+		formData: template.userFormData,
+	};
+};
+
+export const updateUserPopupData: (
+	dispatch: sharedTypes.TDispatch
+) => sharedInterfaces.IPopupData = dispatch => {
+	return {
+		title: 'Редактировать профиль',
+		condition: true,
+		button: 'Сохранить',
 		onSubmit: data => {
 			dispatch(userThunks.updateUserThunk(data.userName, data.photoURL));
 		},

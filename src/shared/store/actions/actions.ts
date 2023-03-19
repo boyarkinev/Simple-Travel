@@ -57,10 +57,9 @@ export const clearPopupFormDataAC = () => ({
 	type: ACTIONS.CLEAR_POPUP_FORM_DATA,
 });
 
-export const popupFormMessageAC = (data: {
-	text: string;
-	isShow: boolean;
-}) => ({
+export const popupFormMessageAC = (
+	data: sharedInterfaces.IPopupFormMessage
+) => ({
 	type: ACTIONS.POPUP_FORM_MESSAGE,
 	payload: data,
 });
