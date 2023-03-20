@@ -35,10 +35,10 @@ module.exports = (env) => {
     // ключ 'index' задает название для js-файла в сборке
   }
 	options.output = { // директория для файлов сборки
-    path: path.resolve(__dirname, './dist'),
-    assetModuleFilename: 'assets/[hash][ext][query]', // Все ассеты будут складываться в dist/assets
+    path: path.resolve(__dirname, './build'),
+    assetModuleFilename: 'assets/[hash][ext][query]', // Все ассеты будут складываться в build/assets
     filename: 'scripts/[name].[contenthash].js', // название задается динамически из колюча в entry: {}
-    clean: true, // очищает директорию dist при каждой сборке
+    clean: true, // очищает директорию build при каждой сборке
   }
 	options.resolve = {
     plugins: [new TsconfigPathsPlugin()],
@@ -61,7 +61,7 @@ module.exports = (env) => {
         test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
         type: isProd === 'production' ? 'asset' : 'asset/resource',
         /* В production режиме изображения размером до 8кб будут инлайнится в код.
-        В режиме разработки все изображения будут помещаться в dist/assets */
+        В режиме разработки все изображения будут помещаться в build/assets */
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
@@ -86,7 +86,7 @@ module.exports = (env) => {
   }
 	options.plugins = plugins(isDev);
   options.devServer = {
-    static: './dist',
+    static: './build',
     historyApiFallback: true,
     open: true,
     compress: true,
