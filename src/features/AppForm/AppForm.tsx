@@ -1,7 +1,6 @@
 import './AppForm.css';
 
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import {
 	AppCheckBox,
@@ -9,7 +8,6 @@ import {
 	AppInput,
 	AppPreloader,
 	sharedInterfaces,
-	sharedSelectors,
 } from '@/shared';
 import { IPopupFormProps } from './ts/propsTypes';
 
@@ -19,9 +17,8 @@ export const AppForm: React.FC<IPopupFormProps> = ({
 	onSubmit,
 	checkBox,
 	message,
+	isDataUploading,
 }) => {
-	const isDataUploading = useSelector(sharedSelectors.isLoading);
-
 	const [isValid, setIsValid] = useState<sharedInterfaces.IKeyBool>({});
 	const [values, setValues] = useState<sharedInterfaces.IKeyString>({});
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);

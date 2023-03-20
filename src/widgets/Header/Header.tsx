@@ -1,7 +1,8 @@
 import './Header.css';
 
 import React, { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth, signOut } from 'firebase/auth';
 
 import {
 	AppClassicButton,
@@ -10,10 +11,11 @@ import {
 	sharedInterfaces,
 	template,
 } from '@/shared';
-import { userThunks } from '@/entities';
+import { userActions, userThunks, userSelectors } from '@/entities';
 
 export const Header: React.FC = () => {
 	const dispatch = useDispatch();
+	const user = useSelector(userSelectors.userData);
 
 	const registerUser = (data: sharedInterfaces.IKeyString) => {
 		if (+data.isChecked) {
@@ -37,19 +39,32 @@ export const Header: React.FC = () => {
 		};
 	}, []);
 
+	const handleAuth = () => {
+		const auth = getAuth();
+		if (!auth.currentUser) {
+			dispatch(sharedActions.setPopupFormDataAC(authPopupData));
+		} else {
+			signOut(auth)
+				.then(() => {
+					dispatch(userActions.clearUserDataAC());
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		}
+	};
+
 	return (
 		<header className='header app__section'>
 			<AppLogo fill='var(--app-light-active)' />
 			<AppClassicButton
-				label='Вход/Регистрация'
+				label={!user.accessToken ? 'Вход/Регистрация' : 'Выйти'}
 				buttonStyle='outline'
 				style={{
 					width: 'max-content',
 					height: 'auto',
 				}}
-				onClick={() => {
-					dispatch(sharedActions.setPopupFormDataAC(authPopupData));
-				}}
+				onClick={handleAuth}
 			/>
 		</header>
 	);

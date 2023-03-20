@@ -5,7 +5,7 @@ import {
 	updateProfile,
 } from 'firebase/auth';
 import { sharedActions, sharedTypes } from '@/shared';
-import { clearRegistrationAC, setUserDataAC } from '../actions/actions';
+import { setUserDataAC } from '../actions/actions';
 import { REQUESTS_ERRORS, userHelpers, userTemplates } from '@/entities';
 
 const {
@@ -16,7 +16,6 @@ const {
 } = sharedActions;
 
 export function signUpUserThunk(email: string, password: string) {
-	console.log('SignUpUser');
 	const auth = getAuth();
 	return (dispatch: sharedTypes.TDispatch): void => {
 		dispatch(setIsLoadingAC(true));
@@ -50,7 +49,6 @@ export function signUpUserThunk(email: string, password: string) {
 			})
 			.finally(() => {
 				dispatch(setIsLoadingAC(false));
-				dispatch(clearRegistrationAC());
 			});
 	};
 }

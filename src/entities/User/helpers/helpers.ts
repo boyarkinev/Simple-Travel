@@ -17,3 +17,7 @@ export const setUserToken = (accessToken: string) => {
 export const getUserToken = () => {
 	return localStorage.getItem('accessToken');
 };
+
+export const clearUserToken = () => {
+	localStorage.remove('accessToken');
+};

@@ -6,4 +6,5 @@ export interface IPopupFormProps {
 	onSubmit: (param: sharedInterfaces.IKeyString) => void;
 	checkBox?: sharedInterfaces.ICheckBox;
 	message?: sharedInterfaces.IPopupFormMessage;
+	isDataUploading?: boolean;
 }

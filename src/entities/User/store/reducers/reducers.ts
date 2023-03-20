@@ -9,22 +9,8 @@ export const userDataReducer = (
 	switch (action.type) {
 		case USER.DATA:
 			return { ...state, ...action.payload };
-		default:
-			return state;
-	}
-};
-
-const userRegistrationInitial = false;
-
-export const userRegistrationReducer = (
-	state = userRegistrationInitial,
-	action: { type: string; payload: boolean }
-) => {
-	switch (action.type) {
-		case USER.IS_REGISTRATION:
-			return action.payload;
-		case USER.CLEAR_IS_REGISTRATION:
-			return userRegistrationInitial;
+		case USER.CLEAR_DATA:
+			return userDataInitials;
 		default:
 			return state;
 	}

@@ -10,5 +10,4 @@ export const rootReducer = combineReducers({
 	popupData: sharedReducers.popupDataReducer,
 	popupFormMessage: sharedReducers.popupFormMessageReducer,
 	userData: userReducers.userDataReducer,
-	isRegistration: userReducers.userRegistrationReducer,
 });

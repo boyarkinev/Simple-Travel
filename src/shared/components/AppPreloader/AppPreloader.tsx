@@ -1,6 +1,7 @@
 import React from 'react';
+import { sharedInterfaces } from '@/shared';
 
-export const AppPreloader: React.FC<IKeyString> = ({
+export const AppPreloader: React.FC<sharedInterfaces.IKeyString> = ({
 	width = '28px',
 	height = '28px',
 	fill = '#ffffff',

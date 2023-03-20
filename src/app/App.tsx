@@ -38,6 +38,7 @@ export const App: React.FC = () => {
 	const isDataDeleting = useSelector(isLoading);
 	const popup = useSelector(popupData);
 	const formMessage = useSelector(popupFormMessage);
+	const isDataUploading = useSelector(sharedSelectors.isLoading);
 
 	const auth = getAuth();
 
@@ -92,6 +93,7 @@ export const App: React.FC = () => {
 					}
 					checkBox={popup.checkBox}
 					message={formMessage}
+					isDataUploading={isDataUploading}
 				/>
 			</AppModal>
 			<AppImageView

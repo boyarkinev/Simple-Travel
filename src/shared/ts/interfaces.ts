@@ -112,5 +112,5 @@ export interface IState {
 	popupData: IPopupData;
 	popupFormMessage: IPopupFormMessage;
 	userData: IUserData;
-	isRegistration: boolean;
+	isUserFetch: boolean;
 }
