@@ -16,6 +16,7 @@ import {
 	cardTemplates,
 	userActions,
 	userHelpers,
+	userSelectors,
 	userTemplates,
 } from '@/entities';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -28,8 +29,13 @@ const {
 	popupData,
 	popupFormMessage,
 } = sharedSelectors;
-const { setPopupFormDataAC, clearPopupFormDataAC, clearPopupFormMessageAC } =
-	sharedActions;
+const {
+	setPopupFormDataAC,
+	clearPopupFormDataAC,
+	clearPopupFormMessageAC,
+	setWarningDataAC,
+	clearWarningDataAC,
+} = sharedActions;
 
 export const App: React.FC = () => {
 	const dispatch = useDispatch();
@@ -40,8 +46,23 @@ export const App: React.FC = () => {
 	const popup = useSelector(popupData);
 	const formMessage = useSelector(popupFormMessage);
 	const isDataUploading = useSelector(sharedSelectors.isLoading);
+	const isAuth = useSelector(userSelectors.isAuth);
 
 	const auth = getAuth();
+
+	const addCardWarning = useMemo(() => {
+		return {
+			text: 'Чтобы добавить карточку, необходимо авторизоваться',
+			sourceData: [
+				{
+					name: 'OK',
+					label: 'OK',
+					onClick: () => dispatch(clearWarningDataAC()),
+				},
+			],
+			showCondition: true,
+		};
+	}, []);
 
 	useEffect(() => {
 		onAuthStateChanged(auth, user => {
@@ -77,7 +98,13 @@ export const App: React.FC = () => {
 		<div className='app'>
 			<Header />
 			<Profile
-				cardPopupHandler={() => dispatch(setPopupFormDataAC(placePopup))}
+				cardPopupHandler={() => {
+					if (!isAuth) {
+						dispatch(setWarningDataAC(addCardWarning));
+					} else {
+						dispatch(setPopupFormDataAC(placePopup));
+					}
+				}}
 				userPopupHandler={() => dispatch(setPopupFormDataAC(userPopup))}
 			/>
 			<CardList places={cards} />

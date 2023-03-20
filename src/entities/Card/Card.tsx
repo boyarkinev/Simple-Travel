@@ -50,17 +50,19 @@ export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 		];
 	}, [id]);
 
-	const likeButtonWarning = {
-		text: 'Необходимо авторизоваться',
-		sourceData: [
-			{
-				name: 'OK',
-				label: 'OK',
-				onClick: () => dispatch(sharedActions.clearWarningDataAC()),
-			},
-		],
-		showCondition: true,
-	};
+	const likeButtonWarning = useMemo(() => {
+		return {
+			text: 'Необходимо авторизоваться',
+			sourceData: [
+				{
+					name: 'OK',
+					label: 'OK',
+					onClick: () => dispatch(sharedActions.clearWarningDataAC()),
+				},
+			],
+			showCondition: true,
+		};
+	}, []);
 
 	const handleLikeButtonClick = (): void => {
 		if (!isAuth) {
