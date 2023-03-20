@@ -52,7 +52,7 @@ export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 
 	const likeButtonWarning = useMemo(() => {
 		return {
-			text: 'Необходимо авторизоваться',
+			text: 'Чтобы поставить отметку "нравится", необходимо авторизоваться',
 			sourceData: [
 				{
 					name: 'OK',
