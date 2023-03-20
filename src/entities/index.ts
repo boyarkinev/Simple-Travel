@@ -9,5 +9,6 @@ export * as userThunks from './User/store/thunks/thunks';
 export * as userTemplates from './User/templates/templates';
 export * as userHelpers from './User/helpers/helpers';
 export { REQUESTS_ERRORS } from './User/constants/constants';
+export { WARNING_DATA } from './User/constants/constants';
 
 export * as cardTemplates from './Card/templates/templates';

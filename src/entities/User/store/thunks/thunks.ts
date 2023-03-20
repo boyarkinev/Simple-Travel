@@ -6,7 +6,12 @@ import {
 } from 'firebase/auth';
 import { sharedActions, sharedTypes } from '@/shared';
 import { setUserDataAC } from '../actions/actions';
-import { REQUESTS_ERRORS, userHelpers, userTemplates } from '@/entities';
+import {
+	REQUESTS_ERRORS,
+	WARNING_DATA,
+	userHelpers,
+	userTemplates,
+} from '@/entities';
 
 const {
 	setIsLoadingAC,
@@ -20,17 +25,9 @@ export function signUpUserThunk(email: string, password: string) {
 	return (dispatch: sharedTypes.TDispatch): void => {
 		dispatch(setIsLoadingAC(true));
 		createUserWithEmailAndPassword(auth, email, password)
-			.then(userCredential => {
-				const user = userCredential.user;
-				console.log('🚀 ~ user', user);
+			.then(() => {
 				dispatch(clearPopupFormDataAC());
-				dispatch(
-					popupFormMessageAC({
-						text: 'Вы успешно зарегистрировались. \n Заполните ваши данные и авторизуйтесь',
-						textColor: 'var(--app-focus-active)',
-						isShow: true,
-					})
-				);
+				dispatch(popupFormMessageAC(WARNING_DATA.REGISTER_SUCCESS));
 				dispatch(setPopupFormDataAC(userTemplates.userPopupData(dispatch)));
 			})
 			.catch(error => {
@@ -39,12 +36,7 @@ export function signUpUserThunk(email: string, password: string) {
 				const errorMessage = error.message;
 				console.log('🚀 ~ errorMessage', errorMessage);
 				if (errorCode === REQUESTS_ERRORS.USER_ALREADY_EXIST) {
-					dispatch(
-						popupFormMessageAC({
-							text: 'Такой E-Mail уже зарегистрирован.',
-							isShow: true,
-						})
-					);
+					dispatch(popupFormMessageAC(WARNING_DATA.USER_EXIST));
 				}
 			})
 			.finally(() => {
@@ -54,7 +46,6 @@ export function signUpUserThunk(email: string, password: string) {
 }
 
 export function signInUserThunk(email: string, password: string) {
-	console.log('SignInUser');
 	const auth = getAuth();
 	return (dispatch: sharedTypes.TDispatch): void => {
 		dispatch(setIsLoadingAC(true));
@@ -73,20 +64,10 @@ export function signInUserThunk(email: string, password: string) {
 				const errorMessage = error.message;
 				console.log('🚀 ~ errorMessage', errorMessage);
 				if (errorCode === REQUESTS_ERRORS.USER_NOT_FOUND) {
-					dispatch(
-						popupFormMessageAC({
-							text: 'Пользователя с таким e-mail не существует.',
-							isShow: true,
-						})
-					);
+					dispatch(popupFormMessageAC(WARNING_DATA.USER_NOT_FOUND));
 				}
 				if (errorCode === REQUESTS_ERRORS.WRONG_PASSWORD) {
-					dispatch(
-						popupFormMessageAC({
-							text: 'Неверный пароль.',
-							isShow: true,
-						})
-					);
+					dispatch(popupFormMessageAC(WARNING_DATA.WRONG_PASSWORD));
 				}
 			})
 			.finally(() => {
@@ -98,7 +79,6 @@ export function signInUserThunk(email: string, password: string) {
 export function updateUserThunk(displayName: string, photoURL: string) {
 	const auth = getAuth();
 	const { currentUser } = auth;
-	console.log('🚀 ~ currentUser', currentUser);
 	return (dispatch: sharedTypes.TDispatch): void => {
 		dispatch(setIsLoadingAC(true));
 		if (currentUser !== null) {
@@ -107,7 +87,6 @@ export function updateUserThunk(displayName: string, photoURL: string) {
 				photoURL,
 			})
 				.then(() => {
-					console.log('Profile updated!');
 					dispatch(setUserDataAC(userHelpers.setUserDataHelper(currentUser)));
 				})
 				.catch(error => {
