@@ -10,20 +10,6 @@ export interface IKeyStrBoolNum {
 	[key: string]: string | boolean | number;
 }
 
-export interface ICardData {
-	placeName: string;
-	placeLink: string;
-	authorId: string;
-	date: string;
-	likesUsers: Array<string>;
-	id: string;
-}
-
-export interface ICardsAction {
-	type: string;
-	payload?: Array<ICardData> | string;
-}
-
 export interface IImageViewData {
 	link: string;
 	name: string;

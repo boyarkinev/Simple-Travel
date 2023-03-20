@@ -6,8 +6,6 @@ export const ACTIONS = {
 	CLEAR_WARNING_DATA: 'CLEAR_WARNING_DATA',
 	IMAGE_VIEW_DATA: 'IMAGE_VIEW_DATA',
 	CLEAR_IMAGE_VIEW_DATA: 'CLEAR_IMAGE_VIEW_DATA',
-	CARDS: 'CARDS',
-	IS_CARDS: 'IS_CARDS',
 	POPUP_FORM_DATA: 'POPUP_FORM_DATA',
 	CLEAR_POPUP_FORM_DATA: 'CLEAR_POPUP_FORM_DATA',
 	POPUP_FORM_MESSAGE: 'POPUP_FORM_MESSAGE',
@@ -37,16 +35,6 @@ export const setWarningDataAC = (data: sharedInterfaces.IWarningData) => ({
 
 export const clearWarningDataAC = () => ({
 	type: ACTIONS.CLEAR_WARNING_DATA,
-});
-
-export const setCardsAC = (data: Array<sharedInterfaces.ICardData>) => ({
-	type: ACTIONS.CARDS,
-	payload: data,
-});
-
-export const setIsLoadCardsAC = (bool: boolean) => ({
-	type: ACTIONS.IS_CARDS,
-	payload: bool,
 });
 
 export const setPopupFormDataAC = (data: sharedInterfaces.IPopupData) => ({

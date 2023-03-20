@@ -1,9 +1,5 @@
-import {
-	sharedInterfaces,
-	sharedThunks,
-	sharedTypes,
-	template,
-} from '@/shared';
+import { cardThunks } from '@/entities';
+import { sharedInterfaces, sharedTypes, template } from '@/shared';
 
 export const placePopupData: (
 	dispatch: sharedTypes.TDispatch,
@@ -14,7 +10,7 @@ export const placePopupData: (
 		condition: true,
 		button: node,
 		onSubmit: data => {
-			dispatch(sharedThunks.putDataThunk(data.placeName, data.placeLink));
+			dispatch(cardThunks.putDataThunk(data.placeName, data.placeLink));
 		},
 		formData: template.placeFormData,
 	};

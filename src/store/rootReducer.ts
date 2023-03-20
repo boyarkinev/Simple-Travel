@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { userReducers } from '@/entities';
+import { cardReducers, userReducers } from '@/entities';
 import { sharedReducers } from '@/shared';
 
 export const rootReducer = combineReducers({
 	isLoading: sharedReducers.isLoadingReducer,
-	places: sharedReducers.placesReducer,
+	places: cardReducers.placesReducer,
 	imageView: sharedReducers.imageViewReducer,
 	warningData: sharedReducers.warningDataReducer,
 	popupData: sharedReducers.popupDataReducer,

@@ -9,11 +9,12 @@ import {
 	AppModal,
 	sharedActions,
 	sharedSelectors,
-	sharedThunks,
 } from '@/shared';
 import { Header, CardList, Profile } from '@/widgets';
 import {
+	cardSelectors,
 	cardTemplates,
+	cardThunks,
 	userActions,
 	userHelpers,
 	userSelectors,
@@ -21,14 +22,8 @@ import {
 } from '@/entities';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-const {
-	places,
-	imageView,
-	warningData,
-	isLoading,
-	popupData,
-	popupFormMessage,
-} = sharedSelectors;
+const { imageView, warningData, isLoading, popupData, popupFormMessage } =
+	sharedSelectors;
 const {
 	setPopupFormDataAC,
 	clearPopupFormDataAC,
@@ -39,7 +34,7 @@ const {
 
 export const App: React.FC = () => {
 	const dispatch = useDispatch();
-	const cards = useSelector(places);
+	const cards = useSelector(cardSelectors.places);
 	const imageViewData = useSelector(imageView);
 	const warning = useSelector(warningData);
 	const isDataDeleting = useSelector(isLoading);
@@ -80,7 +75,7 @@ export const App: React.FC = () => {
 	}, [auth]);
 
 	useEffect(() => {
-		dispatch(sharedThunks.getDataThunk());
+		dispatch(cardThunks.getDataThunk());
 	}, []);
 
 	const userPopup = useMemo(() => {

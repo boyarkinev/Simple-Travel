@@ -1,7 +1,6 @@
 import { sharedInterfaces } from '@/shared';
 
 export const isLoading = (state: sharedInterfaces.IState) => state.isLoading;
-export const places = (state: sharedInterfaces.IState) => state.places;
 export const imageView = (state: sharedInterfaces.IState) => state.imageView;
 export const warningData = (state: sharedInterfaces.IState) =>
 	state.warningData;

@@ -11,4 +11,10 @@ export * as userHelpers from './User/helpers/helpers';
 export { REQUESTS_ERRORS } from './User/constants/constants';
 export { WARNING_DATA } from './User/constants/constants';
 
+export * as cardInterfaces from './Card/ts/interfaces';
+export * as cardActions from './Card/store/actions/actions';
+export * as cardReducers from './Card/store/reducers/reducers';
+export * as cardSelectors from './Card/store/selectors/selectors';
+export * as cardThunks from './Card/store/thunks/thunks';
+export * as cardServices from './Card/api/api.service';
 export * as cardTemplates from './Card/templates/templates';

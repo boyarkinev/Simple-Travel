@@ -3,17 +3,11 @@ import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AppLikes } from '@/features';
-import { userSelectors } from '@/entities';
-import {
-	AppIconButton,
-	sharedActions,
-	sharedInterfaces,
-	sharedThunks,
-} from '@/shared';
+import { cardInterfaces, cardThunks, userSelectors } from '@/entities';
+import { AppIconButton, sharedActions } from '@/shared';
 
 const { setImageViewDataAC, setWarningDataAC, clearImageViewDataAC } =
 	sharedActions;
-const { patchLikesThunk } = sharedThunks;
 
 /**
  * @name Card
@@ -22,7 +16,7 @@ const { patchLikesThunk } = sharedThunks;
  * @param data Данные карточки
  * @returns
  */
-export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
+export const Card: React.FC<{ card: cardInterfaces.ICardData }> = ({
 	card,
 }) => {
 	const { placeName, placeLink, id, likesUsers, authorId } = card;
@@ -39,7 +33,7 @@ export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 				name: 'delete',
 				label: 'Удалить',
 				type: 'submit',
-				onClick: () => dispatch(sharedThunks.deleteDataThunk(id)),
+				onClick: () => dispatch(cardThunks.deleteDataThunk(id)),
 			},
 			{
 				name: 'Cancel',
@@ -75,7 +69,7 @@ export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 			if (likesUsers?.includes(user.uid)) {
 				likes = [...likesUsers.filter(uid => uid !== user.uid)];
 			}
-			dispatch(patchLikesThunk(id, likes, setIsFetch));
+			dispatch(cardThunks.patchLikesThunk(id, likes, setIsFetch));
 		}
 	};
 

@@ -27,7 +27,6 @@ export * as sharedTypes from './ts/types';
 export * as sharedActions from './store/actions/actions';
 export * as sharedReducers from './store/reducers/reducers';
 export * as sharedSelectors from './store/selectors/selectors';
-export * as sharedThunks from './store/thunks/thunks';
 
 // Шаблоны
 export * as template from './templates/templates';
