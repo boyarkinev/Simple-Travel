@@ -1,4 +1,4 @@
-# [vMesto](https://boyarkinev.github.io/vMesto/)
+# [Simple Travel](https://boyarkinev.github.io/vMesto/)
 
 Сайт-фотогалерея.  
 Создан на основе учебного проекта онлайн-платформы Яндекс.Практикум ["Место"](https://github.com/boyarkinev/mesto).  

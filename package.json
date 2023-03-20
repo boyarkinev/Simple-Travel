@@ -1,8 +1,8 @@
 {
-  "name": "vmesto",
+  "name": "Simple-Travel",
   "version": "1.0.0",
   "license": "ISC",
-  "homepage": "http://boyarkinev.github.io/vMesto",
+  "homepage": "http://boyarkinev.github.io/Simple-Travel",
   "main": "src/index.tsx",
   "devDependencies": {
     "@babel/cli": "7.17.6",
