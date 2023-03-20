@@ -28,20 +28,10 @@ export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 	const { placeName, placeLink, id, likesUsers } = card;
 
 	const user = useSelector(userSelectors.userData);
+	const isAuth = useSelector(userSelectors.isAuth);
 	const dispatch = useDispatch();
 
 	const [isFetch, setIsFetch] = useState<boolean>(false);
-
-	const handleLikeButtonClick = (): void => {
-		let likes: Array<string> = [];
-		if (!likesUsers?.includes(user.uid)) {
-			likesUsers ? (likes = [...likesUsers, user.uid]) : (likes = [user.uid]);
-		}
-		if (likesUsers?.includes(user.uid)) {
-			likes = [...likesUsers.filter(uid => uid !== user.uid)];
-		}
-		dispatch(patchLikesThunk(id, likes, setIsFetch));
-	};
 
 	const warningButtons = useMemo(() => {
 		return [
@@ -59,6 +49,33 @@ export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 			},
 		];
 	}, [id]);
+
+	const likeButtonWarning = {
+		text: 'Необходимо авторизоваться',
+		sourceData: [
+			{
+				name: 'OK',
+				label: 'OK',
+				onClick: () => dispatch(sharedActions.clearWarningDataAC()),
+			},
+		],
+		showCondition: true,
+	};
+
+	const handleLikeButtonClick = (): void => {
+		if (!isAuth) {
+			dispatch(setWarningDataAC(likeButtonWarning));
+		} else {
+			let likes: Array<string> = [];
+			if (!likesUsers?.includes(user.uid)) {
+				likesUsers ? (likes = [...likesUsers, user.uid]) : (likes = [user.uid]);
+			}
+			if (likesUsers?.includes(user.uid)) {
+				likes = [...likesUsers.filter(uid => uid !== user.uid)];
+			}
+			dispatch(patchLikesThunk(id, likes, setIsFetch));
+		}
+	};
 
 	return (
 		<div className='place-card' id={id}>
@@ -78,18 +95,20 @@ export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 					src={placeLink}
 					alt={placeName}
 				/>
-				<AppIconButton
-					onClick={() => {
-						dispatch(
-							setWarningDataAC({
-								text: 'Выбранная карточка будет удалена',
-								sourceData: warningButtons,
-								showCondition: true,
-							})
-						);
-					}}
-					icon={<i className='material-icons place-card__delete'>delete</i>}
-				/>
+				{isAuth ? (
+					<AppIconButton
+						onClick={() => {
+							dispatch(
+								setWarningDataAC({
+									text: 'Выбранная карточка будет удалена',
+									sourceData: warningButtons,
+									showCondition: true,
+								})
+							);
+						}}
+						icon={<i className='material-icons place-card__delete'>delete</i>}
+					/>
+				) : null}
 			</div>
 			<div className='place-card__description'>
 				<h3 className='app-title'>{placeName}</h3>

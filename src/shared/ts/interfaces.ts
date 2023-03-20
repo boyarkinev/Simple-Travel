@@ -111,6 +111,6 @@ export interface IState {
 	warningData: IWarningData;
 	popupData: IPopupData;
 	popupFormMessage: IPopupFormMessage;
+	isAuth: boolean;
 	userData: IUserData;
-	isUserFetch: boolean;
 }

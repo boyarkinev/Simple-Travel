@@ -24,7 +24,11 @@ export const AppWarning: React.FC<IAlertPopupProps> = ({
 						key={button.name}
 						onClick={button.onClick}
 						label={button.label}
-						style={{ height: '38px', marginTop: '10px' }}
+						style={{
+							height: '38px',
+							marginTop: '10px',
+							width: sourceData.length === 1 ? '150px' : '100%',
+						}}
 					/>
 				))}
 			</div>

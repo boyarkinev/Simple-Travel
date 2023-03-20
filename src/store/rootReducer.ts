@@ -9,5 +9,6 @@ export const rootReducer = combineReducers({
 	warningData: sharedReducers.warningDataReducer,
 	popupData: sharedReducers.popupDataReducer,
 	popupFormMessage: sharedReducers.popupFormMessageReducer,
+	isAuth: userReducers.isAuthReducer,
 	userData: userReducers.userDataReducer,
 });

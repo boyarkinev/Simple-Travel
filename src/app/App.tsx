@@ -48,8 +48,10 @@ export const App: React.FC = () => {
 				dispatch(
 					userActions.setUserDataAC(userHelpers.setUserDataHelper(user))
 				);
+				dispatch(userActions.setIsAuthAC(true));
 			} else {
 				console.log('Не авторизован');
+				dispatch(userActions.setIsAuthAC(false));
 				// Здесь вызывать popup с сообщением, что не авторизован
 			}
 		});

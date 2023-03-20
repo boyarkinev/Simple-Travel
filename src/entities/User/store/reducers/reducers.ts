@@ -15,3 +15,15 @@ export const userDataReducer = (
 			return state;
 	}
 };
+
+export const isAuthReducer = (
+	state = false,
+	action: { type: string; payload: boolean }
+) => {
+	switch (action.type) {
+		case USER.IS_AUTH:
+			return action.payload;
+		default:
+			return state;
+	}
+};
