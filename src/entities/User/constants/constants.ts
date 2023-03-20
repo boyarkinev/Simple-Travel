@@ -18,7 +18,7 @@ export const WARNING_DATA = {
 		text: 'Пользователя с таким e-mail не существует.',
 		isShow: true,
 	},
-	USER_EXIST: {
+	USER_ALREADY_EXIST: {
 		text: 'Такой E-Mail уже зарегистрирован.',
 		isShow: true,
 	},

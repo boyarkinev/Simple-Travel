@@ -85,6 +85,8 @@ export const popupFormMessageReducer = (
 	switch (action.type) {
 		case ACTIONS.POPUP_FORM_MESSAGE:
 			return action.payload;
+		case ACTIONS.CLEAR_POPUP_FORM_MESSAGE:
+			return popupFormMessageInitial;
 		default:
 			return state;
 	}

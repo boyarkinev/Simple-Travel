@@ -18,6 +18,7 @@ const {
 	popupFormMessageAC,
 	setPopupFormDataAC,
 	clearPopupFormDataAC,
+	clearPopupFormMessageAC,
 } = sharedActions;
 
 export function signUpUserThunk(email: string, password: string) {
@@ -36,7 +37,7 @@ export function signUpUserThunk(email: string, password: string) {
 				const errorMessage = error.message;
 				console.log('🚀 ~ errorMessage', errorMessage);
 				if (errorCode === REQUESTS_ERRORS.USER_ALREADY_EXIST) {
-					dispatch(popupFormMessageAC(WARNING_DATA.USER_EXIST));
+					dispatch(popupFormMessageAC(WARNING_DATA.USER_ALREADY_EXIST));
 				}
 			})
 			.finally(() => {
@@ -57,6 +58,7 @@ export function signInUserThunk(email: string, password: string) {
 				}
 				dispatch(setUserDataAC(userHelpers.setUserDataHelper(user)));
 				dispatch(clearPopupFormDataAC());
+				dispatch(clearPopupFormMessageAC());
 			})
 			.catch(error => {
 				const errorCode = error.code;
@@ -96,6 +98,7 @@ export function updateUserThunk(displayName: string, photoURL: string) {
 				.finally(() => {
 					dispatch(setIsLoadingAC(false));
 					dispatch(clearPopupFormDataAC());
+					dispatch(clearPopupFormMessageAC());
 				});
 		}
 	};

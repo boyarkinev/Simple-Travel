@@ -28,7 +28,8 @@ const {
 	popupData,
 	popupFormMessage,
 } = sharedSelectors;
-const { setPopupFormDataAC, clearPopupFormDataAC } = sharedActions;
+const { setPopupFormDataAC, clearPopupFormDataAC, clearPopupFormMessageAC } =
+	sharedActions;
 
 export const App: React.FC = () => {
 	const dispatch = useDispatch();
@@ -85,7 +86,12 @@ export const App: React.FC = () => {
 				title={<h3 className='app-title'>{popup.title}</h3>}
 				condition={popup.condition}
 				closePopupButton={
-					<AppCloseButton onClose={() => dispatch(clearPopupFormDataAC())} />
+					<AppCloseButton
+						onClose={() => {
+							dispatch(clearPopupFormDataAC());
+							dispatch(clearPopupFormMessageAC());
+						}}
+					/>
 				}>
 				<AppForm
 					inputs={popup.formData}

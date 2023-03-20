@@ -42,6 +42,7 @@ export const putDataThunk = (placeName: string, placeLink: string) => {
 			.finally(() => {
 				dispatch(setIsLoadingAC(false));
 				dispatch(sharedActions.clearPopupFormDataAC());
+				dispatch(sharedActions.clearPopupFormMessageAC());
 			});
 	};
 };

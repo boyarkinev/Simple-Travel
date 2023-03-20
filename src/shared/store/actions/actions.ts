@@ -11,6 +11,7 @@ export const ACTIONS = {
 	POPUP_FORM_DATA: 'POPUP_FORM_DATA',
 	CLEAR_POPUP_FORM_DATA: 'CLEAR_POPUP_FORM_DATA',
 	POPUP_FORM_MESSAGE: 'POPUP_FORM_MESSAGE',
+	CLEAR_POPUP_FORM_MESSAGE: 'CLEAR_POPUP_FORM_MESSAGE',
 };
 
 export const setIsLoadingAC = (bool: boolean) => {
@@ -62,4 +63,8 @@ export const popupFormMessageAC = (
 ) => ({
 	type: ACTIONS.POPUP_FORM_MESSAGE,
 	payload: data,
+});
+
+export const clearPopupFormMessageAC = () => ({
+	type: ACTIONS.CLEAR_POPUP_FORM_MESSAGE,
 });
