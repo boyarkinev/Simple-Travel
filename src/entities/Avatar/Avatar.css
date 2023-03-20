@@ -11,8 +11,8 @@
 }
 
 .avatar__guest {
-  font-size: 150px;
-  line-height: 125px;
+  font-size: 170px;
+  line-height: 140px;
   color: var(--app-dark-disabled);
 }
 
