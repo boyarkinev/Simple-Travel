@@ -25,7 +25,7 @@ const { patchLikesThunk } = sharedThunks;
 export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 	card,
 }) => {
-	const { placeName, placeLink, id, likesUsers } = card;
+	const { placeName, placeLink, id, likesUsers, authorId } = card;
 
 	const user = useSelector(userSelectors.userData);
 	const isAuth = useSelector(userSelectors.isAuth);
@@ -95,7 +95,7 @@ export const Card: React.FC<{ card: sharedInterfaces.ICardData }> = ({
 					src={placeLink}
 					alt={placeName}
 				/>
-				{isAuth ? (
+				{isAuth && authorId === user.uid ? (
 					<AppIconButton
 						onClick={() => {
 							dispatch(

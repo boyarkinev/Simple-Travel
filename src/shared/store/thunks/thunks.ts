@@ -26,12 +26,17 @@ export const getDataThunk = () => {
 };
 
 export const putDataThunk = (placeName: string, placeLink: string) => {
-	return (dispatch: React.Dispatch<React.SetStateAction<{}>>): void => {
+	return (
+		dispatch: React.Dispatch<React.SetStateAction<{}>>,
+		getState: () => { userData: { uid: string } }
+	): void => {
+		const { userData } = getState();
 		dispatch(setIsLoadingAC(true));
 		apiServices
 			.putCard({
 				placeName,
 				placeLink,
+				authorId: userData.uid,
 				date: new Date().toLocaleDateString(),
 				likesUsers: [],
 			})

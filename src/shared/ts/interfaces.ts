@@ -13,6 +13,7 @@ export interface IKeyStrBoolNum {
 export interface ICardData {
 	placeName: string;
 	placeLink: string;
+	authorId: string;
 	date: string;
 	likesUsers: Array<string>;
 	id: string;
