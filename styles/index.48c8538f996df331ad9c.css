@@ -430,15 +430,15 @@ code {
   position: absolute;
   right: 0;
 }
-.user-info {
+.profile__wrapper {
   display: flex;
   position: relative;
-  align-items: flex-start;
+  align-items: center;
   color: white;
   width: 100%;
 }
 @media screen and (max-width: 980px) {
-  .user-info {
+  .profile__wrapper {
     flex-direction: column;
     align-items: center;
   }
@@ -449,4 +449,4 @@ code {
 }
 
 
-/*# sourceMappingURL=index.e5c3e09340e079eb2b17.css.map*/
+/*# sourceMappingURL=index.48c8538f996df331ad9c.css.map*/
