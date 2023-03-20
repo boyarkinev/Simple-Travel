@@ -80,6 +80,14 @@ export function signInUserThunk(email: string, password: string) {
 						})
 					);
 				}
+				if (errorCode === REQUESTS_ERRORS.WRONG_PASSWORD) {
+					dispatch(
+						popupFormMessageAC({
+							text: 'Неверный пароль.',
+							isShow: true,
+						})
+					);
+				}
 			})
 			.finally(() => {
 				dispatch(setIsLoadingAC(false));
