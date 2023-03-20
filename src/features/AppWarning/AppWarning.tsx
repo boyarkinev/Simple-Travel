@@ -27,7 +27,6 @@ export const AppWarning: React.FC<IAlertPopupProps> = ({
 						style={{
 							height: '38px',
 							marginTop: '10px',
-							width: sourceData.length === 1 ? '150px' : '100%',
 						}}
 					/>
 				))}
