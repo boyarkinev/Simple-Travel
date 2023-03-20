@@ -23,7 +23,7 @@ export const Profile: React.FC<IProfileProps> = props => {
 
 	return (
 		<div className='profile app__section'>
-			<div className='user-info'>
+			<div className='profile__wrapper'>
 				<Avatar avatar={avatar} />
 				<User onEdit={userPopupHandler} user={user} />
 				<div className='profile-button__wrapper'>
