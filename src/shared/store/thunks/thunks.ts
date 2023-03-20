@@ -18,6 +18,8 @@ export const getDataThunk = () => {
 					}
 				);
 				dispatch(setCardsAC(places));
+			} else {
+				dispatch(setCardsAC([]));
 			}
 		});
 	};
