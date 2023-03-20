@@ -57,3 +57,7 @@ code {
   margin: 0;
   padding: 0;
 }
+
+* .material-icons {
+  margin-top: 3px;
+}
