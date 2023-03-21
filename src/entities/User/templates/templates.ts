@@ -1,4 +1,4 @@
-import { userThunks } from '@/entities';
+import { userInterfaces, userThunks } from '@/entities';
 import { sharedInterfaces, sharedTypes, template } from '@/shared';
 
 export const userPopupData: (
@@ -17,7 +17,7 @@ export const userPopupData: (
 
 export const updateUserPopupData: (
 	dispatch: sharedTypes.TDispatch,
-	user: sharedInterfaces.IUserData
+	user: userInterfaces.IUserData
 ) => sharedInterfaces.IPopupData = (dispatch, user) => {
 	return {
 		title: 'Редактировать профиль',

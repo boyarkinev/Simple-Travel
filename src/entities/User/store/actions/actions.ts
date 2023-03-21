@@ -1,4 +1,4 @@
-import { sharedInterfaces } from '@/shared';
+import { userInterfaces } from '@/entities';
 
 export const USER = {
 	DATA: 'DATA',
@@ -6,7 +6,7 @@ export const USER = {
 	IS_AUTH: 'IS_AUTH',
 };
 
-export const setUserDataAC = (data: sharedInterfaces.IUserData) => ({
+export const setUserDataAC = (data: userInterfaces.IUserData) => ({
 	type: USER.DATA,
 	payload: data,
 });

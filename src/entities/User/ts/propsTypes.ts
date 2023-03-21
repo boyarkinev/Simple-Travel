@@ -1,6 +1,6 @@
-import { sharedInterfaces } from '@/shared';
+import { userInterfaces } from '@/entities';
 
 export interface IUserProps {
-	user: sharedInterfaces.IUserData;
+	user: userInterfaces.IUserData;
 	onEdit: () => void;
 }

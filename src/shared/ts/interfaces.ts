@@ -6,10 +6,6 @@ export interface IKeyBool {
 	[key: string]: boolean;
 }
 
-export interface IKeyStrBoolNum {
-	[key: string]: string | boolean | number;
-}
-
 export interface IImageViewData {
 	link: string;
 	name: string;
@@ -27,19 +23,6 @@ export interface IWarningData {
 	text: string;
 	sourceData: Array<ISourceData> | null;
 	showCondition: boolean;
-}
-
-export interface IUserData {
-	accessToken?: string;
-	uid: string;
-	displayName: string | null;
-	email: string | null;
-	photoURL: string | null;
-}
-
-export interface IUserDataAction {
-	type: string;
-	payload: IUserData;
 }
 
 export interface IOnValue {
@@ -100,5 +83,5 @@ export interface IState {
 	popupData: IPopupData;
 	popupFormMessage: IPopupFormMessage;
 	isAuth: boolean;
-	userData: IUserData;
+	userData: {};
 }

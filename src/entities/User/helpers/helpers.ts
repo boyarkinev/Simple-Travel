@@ -1,6 +1,6 @@
-import { sharedInterfaces } from '@/shared';
+import { userInterfaces } from '@/entities';
 
-export const setUserDataHelper = (user: sharedInterfaces.IUserData) => {
+export const setUserDataHelper = (user: userInterfaces.IUserData) => {
 	return {
 		accessToken: user.accessToken,
 		uid: user.uid,
