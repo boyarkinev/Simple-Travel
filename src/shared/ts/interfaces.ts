@@ -69,6 +69,7 @@ export interface IFormData {
 	type: string;
 	regex: RegExp;
 	error: string;
+	value?: string;
 }
 
 export interface ICheckBox {

@@ -42,6 +42,7 @@ export const App: React.FC = () => {
 	const formMessage = useSelector(popupFormMessage);
 	const isDataUploading = useSelector(sharedSelectors.isLoading);
 	const isAuth = useSelector(userSelectors.isAuth);
+	const user = useSelector(userSelectors.userData);
 
 	const auth = getAuth();
 
@@ -79,8 +80,8 @@ export const App: React.FC = () => {
 	}, []);
 
 	const userPopup = useMemo(() => {
-		return userTemplates.updateUserPopupData(dispatch);
-	}, []);
+		return userTemplates.updateUserPopupData(dispatch, user);
+	}, [user]);
 
 	const placePopup = useMemo(() => {
 		return cardTemplates.placePopupData(

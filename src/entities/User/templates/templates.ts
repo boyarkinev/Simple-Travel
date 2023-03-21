@@ -16,8 +16,9 @@ export const userPopupData: (
 };
 
 export const updateUserPopupData: (
-	dispatch: sharedTypes.TDispatch
-) => sharedInterfaces.IPopupData = dispatch => {
+	dispatch: sharedTypes.TDispatch,
+	user: sharedInterfaces.IUserData
+) => sharedInterfaces.IPopupData = (dispatch, user) => {
 	return {
 		title: 'Редактировать профиль',
 		condition: true,
@@ -25,6 +26,12 @@ export const updateUserPopupData: (
 		onSubmit: data => {
 			dispatch(userThunks.updateUserThunk(data.userName, data.photoURL));
 		},
-		formData: template.userFormData,
+		formData: template.userFormData.map(el => {
+			if (el.name === 'userName') {
+				return { ...el, value: user.displayName || '' };
+			} else {
+				return { ...el, value: user.photoURL || '' };
+			}
+		}),
 	};
 };

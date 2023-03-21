@@ -10,7 +10,7 @@ export const AppInput: React.FC<IInputProps> = ({
 	onValue,
 	isShowAlerts,
 }) => {
-	const [inputValue, setInputValue] = useState<string>('');
+	const [inputValue, setInputValue] = useState<string>(input.value || '');
 
 	useEffect(() => {
 		onValue?.({ name: input.name, regex: input.regex, value: inputValue });
