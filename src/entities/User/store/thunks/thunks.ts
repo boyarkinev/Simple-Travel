@@ -11,6 +11,7 @@ import {
 	WARNING_DATA,
 	userHelpers,
 	userTemplates,
+	userInterfaces,
 } from '@/entities';
 
 const {
@@ -52,7 +53,7 @@ export function signInUserThunk(email: string, password: string) {
 		dispatch(setIsLoadingAC(true));
 		signInWithEmailAndPassword(auth, email, password)
 			.then(userCredential => {
-				const user: any = userCredential.user;
+				const user: userInterfaces.IUserData = userCredential.user;
 				if (!user.displayName && !user.photoURL) {
 					dispatch(setPopupFormDataAC(userTemplates.userPopupData(dispatch)));
 				}
