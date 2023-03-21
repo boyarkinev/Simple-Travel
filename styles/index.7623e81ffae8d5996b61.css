@@ -47,6 +47,9 @@ code {
   margin: 0;
   padding: 0;
 }
+* .material-icons {
+  margin-top: 3px;
+}
 
 .app {
   background-color: #000000;
@@ -449,4 +452,4 @@ code {
 }
 
 
-/*# sourceMappingURL=index.48c8538f996df331ad9c.css.map*/
+/*# sourceMappingURL=index.7623e81ffae8d5996b61.css.map*/
